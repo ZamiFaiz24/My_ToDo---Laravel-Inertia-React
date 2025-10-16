@@ -16,4 +16,13 @@ class TaskController extends Controller
             'tasks' => $tasks,
         ]);
     }
+
+    public function calendar()
+    {
+        $tasks = Tasks::select('id', 'title', 'due_date as date', 'priority')->get();
+
+        return Inertia::render('calendar', [
+            'tasks' => $tasks,
+        ]);
+    }
 }

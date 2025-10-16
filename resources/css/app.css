@@ -4,7 +4,7 @@
 
 /* Plugin animate */
 @layer utilities {
-  @import 'tailwindcss-animate';
+    @import 'tailwindcss-animate';
 }
 
 :root {
@@ -129,134 +129,135 @@
 }
 
 .animated-gradient {
-  background: linear-gradient(120deg, #1a535c, #4ecdc4, #ffe66d, #ff6b6b, #1a535c);
-  background-size: 300% 300%;
-  animation: gradientMove 8s ease-in-out infinite;
+    background: linear-gradient(120deg, #1a535c, #4ecdc4, #ffe66d, #ff6b6b, #1a535c);
+    background-size: 300% 300%;
+    animation: gradientMove 8s ease-in-out infinite;
 }
 
 @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+        --primary: 222.2 47.4% 11.2%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 210 40% 96%;
+        --secondary-foreground: 222.2 84% 4.9%;
+        --muted: 210 40% 96%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 210 40% 96%;
+        --accent-foreground: 222.2 84% 4.9%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 222.2 84% 4.9%;
+        --radius: 0.5rem;
 
-    /* Custom App Colors */
-    --app-background: #f7fff7; /* mint-cream */
-    --app-background-secondary: #4ecdc4; /* robin-egg-blue */
-    --app-background-accent: #1a535c; /* midnight-green */
+        /* Custom App Colors */
+        --app-background: #f7fff7; /* mint-cream */
+        --app-background-secondary: #4ecdc4; /* robin-egg-blue */
+        --app-background-accent: #1a535c; /* midnight-green */
 
-    --app-primary: #4ecdc4; /* robin-egg-blue */
-    --app-primary-light: rgba(78, 205, 196, 0.2);
-    --app-primary-dark: rgba(78, 205, 196, 0.8);
-    --app-primary-foreground: #1a535c; /* midnight-green */
+        --app-primary: #4ecdc4; /* robin-egg-blue */
+        --app-primary-light: rgba(78, 205, 196, 0.2);
+        --app-primary-dark: rgba(78, 205, 196, 0.8);
+        --app-primary-foreground: #1a535c; /* midnight-green */
 
-    --app-secondary: #1a535c; /* midnight-green */
-    --app-secondary-light: rgba(26, 83, 92, 0.1);
-    --app-secondary-dark: rgba(26, 83, 92, 0.9);
-    --app-secondary-foreground: #f7fff7; /* mint-cream */
+        --app-secondary: #1a535c; /* midnight-green */
+        --app-secondary-light: rgba(26, 83, 92, 0.1);
+        --app-secondary-dark: rgba(26, 83, 92, 0.9);
+        --app-secondary-foreground: #f7fff7; /* mint-cream */
 
-    --app-accent: #ffe66d; /* naples-yellow */
-    --app-accent-light: rgba(255, 230, 109, 0.2);
-    --app-accent-dark: rgba(255, 230, 109, 0.8);
-    --app-accent-foreground: #1a535c; /* midnight-green */
+        --app-accent: #ffe66d; /* naples-yellow */
+        --app-accent-light: rgba(255, 230, 109, 0.2);
+        --app-accent-dark: rgba(255, 230, 109, 0.8);
+        --app-accent-foreground: #1a535c; /* midnight-green */
 
-    --app-success: #4ecdc4; /* robin-egg-blue */
-    --app-success-light: rgba(78, 205, 196, 0.1);
-    --app-success-foreground: #1a535c;
+        --app-success: #4ecdc4; /* robin-egg-blue */
+        --app-success-light: rgba(78, 205, 196, 0.1);
+        --app-success-foreground: #1a535c;
 
-    --app-warning: #ffe66d; /* naples-yellow */
-    --app-warning-light: rgba(255, 230, 109, 0.1);
-    --app-warning-foreground: #1a535c;
+        --app-warning: #ffe66d; /* naples-yellow */
+        --app-warning-light: rgba(255, 230, 109, 0.1);
+        --app-warning-foreground: #1a535c;
 
-    --app-error: #ff6b6b; /* light-red */
-    --app-error-light: rgba(255, 107, 107, 0.1);
-    --app-error-foreground: #ffffff;
+        --app-error: #ff6b6b; /* light-red */
+        --app-error-light: rgba(255, 107, 107, 0.1);
+        --app-error-foreground: #ffffff;
 
-    --app-text: #1a535c; /* midnight-green */
-    --app-text-secondary: #6b7280; /* gray-500 */
-    --app-text-muted: rgba(26, 83, 92, 0.6);
-    --app-text-inverse: #f7fff7; /* mint-cream */
+        --app-text: #1a535c; /* midnight-green */
+        --app-text-secondary: #6b7280; /* gray-500 */
+        --app-text-muted: rgba(26, 83, 92, 0.6);
+        --app-text-inverse: #f7fff7; /* mint-cream */
 
-    --app-border: rgba(78, 205, 196, 0.3);
-    --app-border-light: rgba(78, 205, 196, 0.1);
-    --app-border-focus: #4ecdc4;
+        --app-border: rgba(78, 205, 196, 0.3);
+        --app-border-light: rgba(78, 205, 196, 0.1);
+        --app-border-focus: #4ecdc4;
 
-    --app-button-primary: #4ecdc4;
-    --app-button-primary-hover: rgba(78, 205, 196, 0.9);
-    --app-button-primary-text: #1a535c;
+        --app-button-primary: #4ecdc4;
+        --app-button-primary-hover: rgba(78, 205, 196, 0.9);
+        --app-button-primary-text: #1a535c;
 
-    --app-button-secondary: rgba(78, 205, 196, 0.2);
-    --app-button-secondary-hover: rgba(78, 205, 196, 0.3);
-    --app-button-secondary-text: #1a535c;
+        --app-button-secondary: rgba(78, 205, 196, 0.2);
+        --app-button-secondary-hover: rgba(78, 205, 196, 0.3);
+        --app-button-secondary-text: #1a535c;
 
-    --app-button-gradient: linear-gradient(to right, #ff6b6b, #ffe66d, #4ecdc4);
-    --app-button-gradient-hover: linear-gradient(
-      to right,
-      rgba(255, 107, 107, 0.8),
-      rgba(255, 230, 109, 0.8),
-      rgba(78, 205, 196, 0.8)
-    );
+        --app-button-gradient: linear-gradient(to right, #ff6b6b, #ffe66d, #4ecdc4);
+        --app-button-gradient-hover: linear-gradient(to right, rgba(255, 107, 107, 0.8), rgba(255, 230, 109, 0.8), rgba(78, 205, 196, 0.8));
 
-    --app-input-background: rgba(78, 205, 196, 0.2);
-    --app-input-border: rgba(78, 205, 196, 0.3);
-    --app-input-border-focus: #ffe66d;
-    --app-input-text: #f7fff7;
-    --app-input-placeholder: rgba(78, 205, 196, 0.6);
-  }
+        --app-input-background: rgba(78, 205, 196, 0.2);
+        --app-input-border: rgba(78, 205, 196, 0.3);
+        --app-input-border-focus: #ffe66d;
+        --app-input-text: #f7fff7;
+        --app-input-placeholder: rgba(78, 205, 196, 0.6);
+    }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+    .dark {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222.2 84% 4.9%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 11.2%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --input: 217.2 32.6% 17.5%;
+        --ring: 212.7 26.8% 83.9%;
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
 }
 
 @layer base {
@@ -276,4 +277,15 @@
     }
 }
 
-
+/* app.css */
+.react-calendar {
+    background: #fff;
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    color: #2563eb;
+    font-size: 1rem;
+}
+.react-calendar__tile--active {
+    background: #3b82f6 !important;
+    color: #fff !important;
+}

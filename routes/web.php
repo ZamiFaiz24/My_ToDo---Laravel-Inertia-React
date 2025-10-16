@@ -15,7 +15,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/tambah-tugas', function () {
         return Inertia::render('tasks/tambah-tasks');
     })->name('tasks.create');
+
+    Route::get('/calendar', [TaskController::class, 'calendar'])->name('calendar');
 });
 
-require __DIR__.'/settings.php';
-require __DIR__.'/auth.php';
+require __DIR__ . '/settings.php';
+require __DIR__ . '/auth.php';
