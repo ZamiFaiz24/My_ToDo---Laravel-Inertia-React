@@ -17,6 +17,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('tasks.create');
 
     Route::get('/calendar', [TaskController::class, 'calendar'])->name('calendar');
+
+    // Tambahkan route statistik
+    Route::get('/stats', [TaskController::class, 'stats'])->name('stats');
 });
 
 require __DIR__ . '/settings.php';

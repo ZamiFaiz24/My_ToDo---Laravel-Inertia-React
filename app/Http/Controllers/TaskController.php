@@ -25,4 +25,13 @@ class TaskController extends Controller
             'tasks' => $tasks,
         ]);
     }
+
+    public function stats()
+    {
+        $tasks = Tasks::select('id', 'title', 'completed', 'priority')->get();
+
+        return Inertia::render('stats', [
+            'tasks' => $tasks,
+        ]);
+    }
 }
