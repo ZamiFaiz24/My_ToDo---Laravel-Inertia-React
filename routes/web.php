@@ -18,7 +18,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/calendar', [TaskController::class, 'calendar'])->name('calendar');
 
-    // Tambahkan route statistik
+    // detail task
+    Route::get('/task/{id}', [TaskController::class, 'show'])->name('task.show');
+
+    // statistik
     Route::get('/stats', [TaskController::class, 'stats'])->name('stats');
 });
 

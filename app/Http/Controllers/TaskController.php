@@ -34,4 +34,14 @@ class TaskController extends Controller
             'tasks' => $tasks,
         ]);
     }
+
+    public function show($id)
+    {
+        $task = Tasks::findOrFail($id);
+
+        // render komponen React yang ada di resources/js/pages/tasks/show.tsx
+        return Inertia::render('tasks/show', [
+            'task' => $task,
+        ]);
+    }
 }
