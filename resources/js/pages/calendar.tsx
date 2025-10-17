@@ -5,7 +5,7 @@ import "react-calendar/dist/Calendar.css"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import AppLayout from "@/layouts/app-layout"
-import { usePage } from '@inertiajs/react'
+import { usePage, Head } from '@inertiajs/react'
 import { Calendar as CalendarIcon } from "lucide-react"
 
 export default function CalendarPage() {
@@ -38,6 +38,7 @@ export default function CalendarPage() {
 
     return (
         <div className="min-h-screen bg-[#F3F4F6]">
+            <Head title="Kalender" />
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <Card className="bg-white border border-[#E5E7EB] shadow-md">
                     <CardHeader className="flex flex-col items-start gap-2">

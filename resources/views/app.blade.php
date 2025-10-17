@@ -30,18 +30,17 @@
             }
         </style>
 
-        <title inertia>{{ config('app.name', 'Laravel') }}</title>
+        {{-- template title (Inertia akan gabungkan dengan Head title dari React) --}}
+        <title inertia>{{ config('app.name', 'MyToDo') }}</title>
 
         <link rel="icon" href="{{ asset('favicon.ico') }}" />
-        {{-- <link rel="icon" href="/favicon.svg" type="image/svg+xml"> --}}
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-
-        @routes
+        {{-- load vite / assets --}}
         @viteReactRefresh
-        @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+        @vite(['resources/js/app.js'])
+
+        {{-- Inertia head: tempat Inertia/React memasukkan <Head title="..."/> --}}
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
