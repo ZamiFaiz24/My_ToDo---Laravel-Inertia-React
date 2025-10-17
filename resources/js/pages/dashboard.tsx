@@ -117,16 +117,18 @@ function Dashboard() {
               </div>
 
               <div className="flex items-center gap-3">
-                <Link href="/add">
+                <Link href="/tambah-tugas">
                   <Button className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold shadow-md">
                     <Plus className="mr-2 h-4 w-4" />
                     Tambah Tugas
                   </Button>
                 </Link>
-                <Button variant="ghost" className="hidden md:inline-flex text-[#6B7280] hover:bg-[#F8FAFC]">
-                  <Calendar className="h-4 w-4 mr-2 text-[#3B82F6]" />
-                  Kalender
-                </Button>
+                <Link href="/calendar">
+                  <Button variant="ghost" className="hidden md:inline-flex text-[#6B7280] hover:bg-[#F8FAFC]">
+                    <Calendar className="h-4 w-4 mr-2 text-[#3B82F6]" />
+                    Kalender
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

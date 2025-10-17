@@ -1,22 +1,14 @@
 import InputError from '@/components/input-error';
 import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
-import { type BreadcrumbItem } from '@/types';
 import { Transition } from '@headlessui/react';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
+import { Lock } from 'lucide-react';
 
-import HeadingSmall from '@/components/heading-small';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Password settings',
-        href: '/settings/password',
-    },
-];
 
 export default function Password() {
     const passwordInput = useRef<HTMLInputElement>(null);
@@ -49,78 +41,86 @@ export default function Password() {
     };
 
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
+        <AppLayout>
             <Head title="Password settings" />
 
             <SettingsLayout>
-                <div className="space-y-6">
-                    <HeadingSmall title="Update password" description="Ensure your account is using a long, random password to stay secure" />
-
-                    <form onSubmit={updatePassword} className="space-y-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="current_password">Current password</Label>
-
-                            <Input
-                                id="current_password"
-                                ref={currentPasswordInput}
-                                value={data.current_password}
-                                onChange={(e) => setData('current_password', e.target.value)}
-                                type="password"
-                                className="mt-1 block w-full"
-                                autoComplete="current-password"
-                                placeholder="Current password"
-                            />
-
-                            <InputError message={errors.current_password} />
+                <div className="max-w-2xl mx-auto py-8">
+                    <div className="mb-8 flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-xl bg-[#E6F0FF] flex items-center justify-center shadow-sm">
+                            <Lock className="h-6 w-6 text-[#2563EB]" />
                         </div>
-
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">New password</Label>
-
-                            <Input
-                                id="password"
-                                ref={passwordInput}
-                                value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
-                                type="password"
-                                className="mt-1 block w-full"
-                                autoComplete="new-password"
-                                placeholder="New password"
-                            />
-
-                            <InputError message={errors.password} />
+                        <div>
+                            <h1 className="text-2xl font-bold text-[#2563EB] mb-1">Pengaturan Password</h1>
+                            <p className="text-[#6B7280]">Pastikan akun Anda menggunakan password yang kuat dan unik.</p>
                         </div>
+                    </div>
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="password_confirmation">Confirm password</Label>
+                    <div className="bg-white border border-[#E5E7EB] rounded-xl shadow-md p-6">
+                        <form onSubmit={updatePassword} className="space-y-6">
+                            <div>
+                                <Label htmlFor="current_password" className="text-[#2563EB] font-medium">Password Saat Ini</Label>
+                                <Input
+                                    id="current_password"
+                                    ref={currentPasswordInput}
+                                    value={data.current_password}
+                                    onChange={(e) => setData('current_password', e.target.value)}
+                                    type="password"
+                                    className="mt-2 block w-full border-[#E5E7EB] focus:border-[#3B82F6]"
+                                    autoComplete="current-password"
+                                    placeholder="Password saat ini"
+                                />
+                                <InputError className="mt-2" message={errors.current_password} />
+                            </div>
 
-                            <Input
-                                id="password_confirmation"
-                                value={data.password_confirmation}
-                                onChange={(e) => setData('password_confirmation', e.target.value)}
-                                type="password"
-                                className="mt-1 block w-full"
-                                autoComplete="new-password"
-                                placeholder="Confirm password"
-                            />
+                            <div>
+                                <Label htmlFor="password" className="text-[#2563EB] font-medium">Password Baru</Label>
+                                <Input
+                                    id="password"
+                                    ref={passwordInput}
+                                    value={data.password}
+                                    onChange={(e) => setData('password', e.target.value)}
+                                    type="password"
+                                    className="mt-2 block w-full border-[#E5E7EB] focus:border-[#3B82F6]"
+                                    autoComplete="new-password"
+                                    placeholder="Password baru"
+                                />
+                                <InputError className="mt-2" message={errors.password} />
+                            </div>
 
-                            <InputError message={errors.password_confirmation} />
-                        </div>
+                            <div>
+                                <Label htmlFor="password_confirmation" className="text-[#2563EB] font-medium">Konfirmasi Password</Label>
+                                <Input
+                                    id="password_confirmation"
+                                    value={data.password_confirmation}
+                                    onChange={(e) => setData('password_confirmation', e.target.value)}
+                                    type="password"
+                                    className="mt-2 block w-full border-[#E5E7EB] focus:border-[#3B82F6]"
+                                    autoComplete="new-password"
+                                    placeholder="Konfirmasi password baru"
+                                />
+                                <InputError className="mt-2" message={errors.password_confirmation} />
+                            </div>
 
-                        <div className="flex items-center gap-4">
-                            <Button disabled={processing}>Save password</Button>
-
-                            <Transition
-                                show={recentlySuccessful}
-                                enter="transition ease-in-out"
-                                enterFrom="opacity-0"
-                                leave="transition ease-in-out"
-                                leaveTo="opacity-0"
-                            >
-                                <p className="text-sm text-neutral-600">Saved</p>
-                            </Transition>
-                        </div>
-                    </form>
+                            <div className="flex items-center gap-4 mt-4">
+                                <Button
+                                    disabled={processing}
+                                    className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold px-6"
+                                >
+                                    Simpan Password
+                                </Button>
+                                <Transition
+                                    show={recentlySuccessful}
+                                    enter="transition ease-in-out"
+                                    enterFrom="opacity-0"
+                                    leave="transition ease-in-out"
+                                    leaveTo="opacity-0"
+                                >
+                                    <p className="text-sm text-green-600">Password berhasil disimpan</p>
+                                </Transition>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </SettingsLayout>
         </AppLayout>
