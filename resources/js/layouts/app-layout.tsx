@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/navbar';
 import '../../css/app.css'; // Impor CSS utama jika dibutuhkan
 
@@ -7,14 +7,10 @@ interface Props {
 }
 
 export default function AppLayout({ children }: Props) {
-  useEffect(() => {
-    document.documentElement.classList.remove('dark'); // <- Ini baris pentingnya
-  }, []);
-
   return (
-    <div lang="id" className="font-sans bg-app-background min-h-screen">
+    <div lang="id" className="font-sans bg-app-background min-h-screen text-app-text transition-colors duration-300">
       <Navbar />
-      <main>{children}</main>
+      <main className="bg-app-background">{children}</main>
     </div>
   );
 }

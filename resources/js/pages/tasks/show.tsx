@@ -28,13 +28,13 @@ export default function TaskShow() {
   const getPriorityColor = (p?: string) => {
     switch (p) {
       case 'high':
-        return 'bg-[#3B82F6] text-white'
+        return 'bg-app-error text-white'
       case 'medium':
-        return 'bg-[#2563EB] text-white'
+        return 'bg-app-warning text-app-text'
       case 'low':
-        return 'bg-[#E5E7EB] text-[#2563EB]'
+        return 'bg-app-border text-app-text'
       default:
-        return 'bg-[#F3F4F6] text-[#6B7280]'
+        return 'bg-app-background text-app-text-secondary'
     }
   }
 
@@ -61,11 +61,11 @@ export default function TaskShow() {
   return (
     <>
       <Head title={`Detail Tugas - ${task?.title || 'Detail'}`} />
-      <div className="min-h-screen bg-[#F3F4F6]">
+      <div className="min-h-screen bg-app-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-4 flex items-center gap-3">
             <Link href="/dashboard">
-              <Button variant="ghost" className="text-[#2563EB]">
+              <Button variant="ghost" className="text-app-primary">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Kembali
               </Button>
@@ -73,18 +73,18 @@ export default function TaskShow() {
             <div className="ml-auto flex items-center gap-2">
               <Button
                 variant="outline"
-                className={`flex items-center gap-2 ${task.completed ? 'text-[#10B981] border-[#D1FAE5]' : 'text-[#2563EB]'}`}
+                className={`flex items-center gap-2 ${task.completed ? 'text-app-success border-app-success/30' : 'text-app-primary'}`}
                 onClick={toggleComplete}
               >
                 <CheckCircle2 className="h-4 w-4" />
                 {task.completed ? 'Tandai Belum Selesai' : 'Tandai Selesai'}
               </Button>
               <Link href={`/task/${task.id}/edit`}>
-                <Button variant="ghost" className="text-[#2563EB]">
+                <Button variant="ghost" className="text-app-primary">
                   <Edit className="h-4 w-4" />
                 </Button>
               </Link>
-              <Button variant="ghost" className="text-[#FB7185]" onClick={handleDelete}>
+              <Button variant="ghost" className="text-app-error" onClick={handleDelete}>
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
@@ -93,11 +93,11 @@ export default function TaskShow() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main content */}
             <div className="lg:col-span-2 space-y-4">
-              <Card className="bg-white border border-[#E5E7EB] shadow-sm">
+              <Card className="bg-app-background-secondary border border-app-border shadow-sm">
                 <CardHeader>
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <CardTitle className="text-[#2563EB] text-xl font-semibold">
+                      <CardTitle className="text-app-primary text-xl font-semibold">
                         {task.title}
                       </CardTitle>
                       <CardDescription className="text-[#6B7280] mt-1">
@@ -135,7 +135,7 @@ export default function TaskShow() {
                   {/* Checklist */}
                   {task.checklist && task.checklist.length > 0 && (
                     <>
-                      <h4 className="text-sm font-semibold text-[#2563EB] mb-2 flex items-center gap-2">
+                      <h4 className="text-sm font-semibold text-app-primary mb-2 flex items-center gap-2">
                         <List className="h-4 w-4" /> Checklist
                       </h4>
                       <ul className="space-y-2">
@@ -164,11 +164,11 @@ export default function TaskShow() {
                         {task.attachments.map((att) => (
                           <li key={att.id} className="flex items-center justify-between bg-[#F8FAFF] border border-[#E5E7EB] p-2 rounded-md">
                             <div className="flex items-center gap-3">
-                              <Paperclip className="h-4 w-4 text-[#2563EB]" />
-                              <div className="text-sm text-[#2563EB]">{att.name}</div>
+                              <Paperclip className="h-4 w-4 text-app-primary" />
+                              <div className="text-sm text-app-primary">{att.name}</div>
                             </div>
                             {att.url ? (
-                              <a href={att.url} className="text-sm text-[#2563EB] underline" target="_blank" rel="noreferrer">Download</a>
+                              <a href={att.url} className="text-sm text-app-primary underline" target="_blank" rel="noreferrer">Download</a>
                             ) : (
                               <span className="text-xs text-[#6B7280]">—</span>
                             )}

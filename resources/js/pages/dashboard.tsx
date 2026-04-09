@@ -101,31 +101,31 @@ function Dashboard() {
   return (
     <>
       <Head title="Dashboard" />
-      <div className="min-h-screen bg-[#F3F4F6]">
+      <div className="min-h-screen bg-app-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Header */}
           <div className="mb-8">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-gradient-to-br from-[#E6F0FF] to-[#EAF4FF] shadow-sm">
-                  <ListTodo className="h-6 w-6 text-[#2563EB]" />
+                <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-app-primary-light shadow-sm">
+                  <ListTodo className="h-6 w-6 text-app-primary" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-[#0F172A] mb-1">Dashboard</h1>
-                  <p className="text-[#6B7280]">Selamat datang kembali! Ringkasan tugas Anda hari ini.</p>
+                  <h1 className="text-3xl font-bold text-app-text mb-1">Dashboard</h1>
+                  <p className="text-app-text-secondary">Selamat datang kembali! Ringkasan tugas Anda hari ini.</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
                 <Link href="/tambah-tugas">
-                  <Button className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold shadow-md">
+                  <Button className="bg-app-primary hover:bg-app-primary-dark text-white font-semibold shadow-md">
                     <Plus className="mr-2 h-4 w-4" />
                     Tambah Tugas
                   </Button>
                 </Link>
                 <Link href="/calendar">
-                  <Button variant="ghost" className="hidden md:inline-flex text-[#6B7280] hover:bg-[#F8FAFC]">
-                    <Calendar className="h-4 w-4 mr-2 text-[#3B82F6]" />
+                  <Button variant="ghost" className="hidden md:inline-flex text-app-text-secondary hover:bg-app-primary-light">
+                    <Calendar className="h-4 w-4 mr-2 text-app-primary" />
                     Kalender
                   </Button>
                 </Link>
@@ -135,83 +135,83 @@ function Dashboard() {
 
           {/* Stat Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="bg-white/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
+            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
               <CardHeader className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-[#EFF6FF] flex items-center justify-center">
-                    <ListTodo className="h-7 w-7 text-[#3B82F6]" />
+                  <div className="h-12 w-12 rounded-xl bg-app-primary-light flex items-center justify-center">
+                    <ListTodo className="h-7 w-7 text-app-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-sm font-medium text-[#0F172A]">Total Tugas</CardTitle>
-                    <div className="text-2xl font-bold text-[#2563EB]">{totalTodos}</div>
+                    <CardTitle className="text-sm font-medium text-app-text">Total Tugas</CardTitle>
+                    <div className="text-2xl font-bold text-app-primary">{totalTodos}</div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <p className="text-xs text-[#6B7280]">Semua tugas Anda</p>
+                <p className="text-xs text-app-text-secondary">Semua tugas Anda</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
+            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
               <CardHeader className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-[#ECFDF5] flex items-center justify-center">
-                    <CheckCircle2 className="h-7 w-7 text-[#10B981]" />
+                  <div className="h-12 w-12 rounded-xl bg-app-success/20 flex items-center justify-center">
+                    <CheckCircle2 className="h-7 w-7 text-app-success" />
                   </div>
                   <div>
-                    <CardTitle className="text-sm font-medium text-[#0F172A]">Selesai</CardTitle>
-                    <div className="text-2xl font-bold text-[#2563EB]">{completedTodos}</div>
+                    <CardTitle className="text-sm font-medium text-app-text">Selesai</CardTitle>
+                    <div className="text-2xl font-bold text-app-success">{completedTodos}</div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <p className="text-xs text-[#6B7280]">Tugas yang sudah selesai</p>
+                <p className="text-xs text-app-text-secondary">Tugas yang sudah selesai</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
+            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
               <CardHeader className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-[#FEF3C7] flex items-center justify-center">
-                    <Calendar className="h-7 w-7 text-[#D97706]" />
+                  <div className="h-12 w-12 rounded-xl bg-app-warning/20 flex items-center justify-center">
+                    <Calendar className="h-7 w-7 text-app-warning" />
                   </div>
                   <div>
-                    <CardTitle className="text-sm font-medium text-[#0F172A]">Hari Ini</CardTitle>
-                    <div className="text-2xl font-bold text-[#2563EB]">{todayTodos.length}</div>
+                    <CardTitle className="text-sm font-medium text-app-text">Hari Ini</CardTitle>
+                    <div className="text-2xl font-bold text-app-warning">{todayTodos.length}</div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <p className="text-xs text-[#6B7280]">Tugas yang jatuh hari ini</p>
+                <p className="text-xs text-app-text-secondary">Tugas yang jatuh hari ini</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-white/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
+            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
               <CardHeader className="flex items-center justify-between pb-2">
                 <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-xl bg-[#EEF2FF] flex items-center justify-center">
-                    <TrendingUp className="h-7 w-7 text-[#6366F1]" />
+                  <div className="h-12 w-12 rounded-xl bg-app-primary-light flex items-center justify-center">
+                    <TrendingUp className="h-7 w-7 text-app-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-sm font-medium text-[#0F172A]">Progress</CardTitle>
-                    <div className="text-2xl font-bold text-[#2563EB]">{Math.round(completionRate)}%</div>
+                    <CardTitle className="text-sm font-medium text-app-text">Progress</CardTitle>
+                    <div className="text-2xl font-bold text-app-primary">{Math.round(completionRate)}%</div>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <Progress value={completionRate} className="mt-2 bg-[#E0F2FE]" />
-                <p className="text-xs text-[#6B7280] mt-2">Persentase tugas selesai</p>
+                <Progress value={completionRate} className="mt-2 bg-app-primary-light" />
+                <p className="text-xs text-app-text-secondary mt-2">Persentase tugas selesai</p>
               </CardContent>
             </Card>
           </div>
 
           {/* Search & Filters */}
-          <Card className="mb-8 bg-white rounded-xl border border-[#E8EEF5] shadow-sm">
+          <Card className="mb-8 bg-app-background-secondary rounded-xl border border-app-border shadow-sm">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-[#0F172A] font-semibold">Semua Tugas</CardTitle>
-                  <CardDescription className="text-[#6B7280]">Kelola dan pantau semua tugas Anda</CardDescription>
+                  <CardTitle className="text-app-text font-semibold">Semua Tugas</CardTitle>
+                  <CardDescription className="text-app-text-secondary">Kelola dan pantau semua tugas Anda</CardDescription>
                 </div>
                 <div className="hidden sm:flex items-center gap-2">
                   {(['all', 'pending', 'completed'] as const).map((status) => (
@@ -221,8 +221,8 @@ function Dashboard() {
                       onClick={() => setFilterStatus(status)}
                       className={
                         filterStatus === status
-                          ? 'bg-[#3B82F6] text-white hover:bg-[#2563EB]'
-                          : 'border-[#DDE8FF] text-[#2563EB] hover:bg-[#F8FAFC]'
+                          ? 'bg-app-primary text-white hover:bg-app-primary-dark'
+                          : 'border-app-border text-app-primary hover:bg-app-primary-light'
                       }
                     >
                       {status === 'all' ? 'Semua' : status === 'pending' ? 'Belum Selesai' : 'Selesai'}
@@ -235,12 +235,12 @@ function Dashboard() {
             <CardContent>
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#9CA3AF] h-4 w-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-app-text-secondary h-4 w-4" />
                   <Input
                     placeholder="Cari tugas..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10 border-[#E5E7EB] focus:border-[#3B82F6] rounded-md"
+                    className="pl-10 border-app-border focus:border-app-primary rounded-md bg-app-background text-app-text placeholder:text-app-text-muted"
                   />
                 </div>
                 <div className="flex gap-2 items-center sm:hidden">
@@ -248,7 +248,7 @@ function Dashboard() {
                     <Button
                       key={status}
                       onClick={() => setFilterStatus(status)}
-                      className={`text-sm ${filterStatus === status ? 'bg-[#3B82F6] text-white' : 'text-[#2563EB] border-[#DDE8FF]'}`}
+                      className={`text-sm ${filterStatus === status ? 'bg-app-primary text-white' : 'text-app-primary border-app-border'}`}
                     >
                       {status === 'all' ? 'Semua' : status === 'pending' ? 'Belum' : 'Selesai'}
                     </Button>
@@ -259,9 +259,9 @@ function Dashboard() {
               <div className="space-y-4">
                 {filteredTodos.length === 0 ? (
                   <div className="text-center py-12">
-                    <Target className="h-16 w-16 text-[#E5E7EB] mx-auto mb-4" />
-                    <p className="text-[#6B7280] text-lg mb-2">Tidak ada tugas ditemukan</p>
-                    <p className="text-sm text-[#6B7280]">
+                    <Target className="h-16 w-16 text-app-border mx-auto mb-4" />
+                    <p className="text-app-text-secondary text-lg mb-2">Tidak ada tugas ditemukan</p>
+                    <p className="text-sm text-app-text-secondary">
                       {searchTerm ? 'Coba ubah kata kunci pencarian' : 'Tambahkan tugas baru untuk memulai'}
                     </p>
                   </div>
@@ -269,7 +269,7 @@ function Dashboard() {
                   filteredTodos.map((todo) => (
                     <div
                       key={todo.id}
-                      className="flex items-center space-x-4 p-4 bg-white rounded-xl ring-1 ring-[#EEF3FA] hover:shadow-md transition"
+                      className="flex items-center space-x-4 p-4 bg-app-background-secondary rounded-xl ring-1 ring-app-border hover:shadow-md transition"
                     >
                       <Button
                         variant="ghost"
@@ -278,33 +278,33 @@ function Dashboard() {
                         className="p-0 h-auto hover:bg-transparent"
                       >
                         <CheckCircle2
-                          className={`h-6 w-6 ${todo.completed ? 'text-[#10B981]' : 'text-[#9CA3AF] hover:text-[#3B82F6]'}`}
+                          className={`h-6 w-6 ${todo.completed ? 'text-app-success' : 'text-app-text-muted hover:text-app-primary'}`}
                         />
                       </Button>
 
                       <div className="flex-1 min-w-0">
                         <h3
-                          className={`font-semibold text-lg ${todo.completed ? 'line-through text-[#9CA3AF]' : 'text-[#0F172A]'}`}
+                          className={`font-semibold text-lg ${todo.completed ? 'line-through text-app-text-muted' : 'text-app-text'}`}
                         >
                           {todo.title}
                         </h3>
-                        <p className="text-[#6B7280] text-sm mt-1 line-clamp-2">{todo.description}</p>
+                        <p className="text-app-text-secondary text-sm mt-1 line-clamp-2">{todo.description}</p>
                         <div className="flex items-center space-x-3 mt-3">
                           <Badge
                             className={
                               todo.priority === 'high'
-                                ? 'bg-[#3B82F6] text-white'
+                                ? 'bg-app-error text-white'
                                 : todo.priority === 'medium'
-                                ? 'bg-[#2563EB] text-white'
-                                : 'bg-[#E5E7EB] text-[#2563EB]'
+                                ? 'bg-app-warning text-app-text'
+                                : 'bg-app-border text-app-text'
                             }
                           >
                             {todo.priority}
                           </Badge>
-                          <Badge variant="outline" className="text-xs border-[#E5E7EB] text-[#6B7280]">
+                          <Badge variant="outline" className="text-xs border-app-border text-app-text-secondary">
                             {todo.category}
                           </Badge>
-                          <div className="flex items-center text-xs text-[#6B7280]">
+                          <div className="flex items-center text-xs text-app-text-secondary">
                             <Clock className="h-3 w-3 mr-1" />
                             {new Date(todo.dueDate).toLocaleDateString('id-ID')}
                           </div>
@@ -313,20 +313,20 @@ function Dashboard() {
 
                       <div className="flex items-center space-x-2">
                         <Link href={`/task/${todo.id}`}>
-                          <Button variant="ghost" size="sm" className="text-[#3B82F6] hover:bg-[#E6F3FF]">
+                          <Button variant="ghost" size="sm" className="text-app-primary hover:bg-app-primary-light">
                             <Eye className="h-4 w-4" />
                           </Button>
                         </Link>
 
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="text-[#9CA3AF] hover:text-[#374151]">
+                            <Button variant="ghost" size="sm" className="text-app-text-secondary hover:text-app-text">
                               <MoreVertical className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
                           <DropdownMenuContent
                             align="end"
-                            className="bg-white border border-[#E5E7EB] shadow-lg text-[#0F172A]"
+                            className="bg-app-background-secondary border border-app-border shadow-lg text-app-text"
                           >
                             <DropdownMenuLabel>Aksi</DropdownMenuLabel>
                             <DropdownMenuSeparator />
@@ -341,9 +341,9 @@ function Dashboard() {
                               Edit
                             </DropdownMenuItem>
                             <DropdownMenuItem>Duplicate</DropdownMenuItem>
-                            <DropdownMenuSeparator />
+                            <DropdownMenuSeparator className="bg-app-border" />
                             <DropdownMenuItem
-                              className="text-[#FB7185] focus:text-[#FB7185]"
+                              className="text-app-error focus:text-app-error"
                               onClick={() => deleteTodo(todo.id)}
                             >
                               <Trash2 className="mr-2 h-4 w-4" />

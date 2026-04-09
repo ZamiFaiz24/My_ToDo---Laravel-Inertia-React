@@ -44,13 +44,13 @@ function AddTask() {
     const getPriorityColor = (priority: string) => {
       switch (priority) {
         case "high":
-          return "bg-[#3B82F6] text-white"
+          return "bg-app-error text-white"
         case "medium":
-          return "bg-[#2563EB] text-white"
+          return "bg-app-warning text-app-text"
         case "low":
-          return "bg-[#E5E7EB] text-[#2563EB]"
+          return "bg-app-border text-app-text"
         default:
-          return "bg-[#F3F4F6] text-[#6B7280]"
+          return "bg-app-background text-app-text-secondary"
       }
     }
 
@@ -90,21 +90,21 @@ function AddTask() {
   return (
     <>
       <Head title="Tambah Tugas" />
-      <div className="min-h-screen bg-[#F3F4F6]">
+      <div className="min-h-screen bg-app-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <Link href="/dashboard">
-                <Button variant="ghost" className="text-[#2563EB] hover:bg-[#E0F2FE]">
+                <Button variant="ghost" className="text-app-primary hover:bg-app-primary-light">
                   <ArrowLeft className="mr-2 h-4 w-4" />
                   Kembali ke Dashboard
                 </Button>
               </Link>
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-[#2563EB] mb-2">Tambah Tugas Baru</h1>
-              <p className="text-[#6B7280]">Buat tugas baru dan atur prioritas serta tenggat waktunya</p>
+              <h1 className="text-3xl font-bold text-app-primary mb-2">Tambah Tugas Baru</h1>
+              <p className="text-app-text-secondary">Buat tugas baru dan atur prioritas serta tenggat waktunya</p>
             </div>
           </div>
 
@@ -113,14 +113,14 @@ function AddTask() {
               {/* Main Form */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Basic Information */}
-                <Card className="bg-white border border-[#E5E7EB] hover:shadow-md hover:border-[#3B82F6] transition">
+                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
                   <CardHeader>
-                    <CardTitle className="text-[#2563EB]">Informasi Dasar</CardTitle>
-                    <CardDescription className="text-[#6B7280]">Masukkan informasi dasar tentang tugas Anda</CardDescription>
+                    <CardTitle className="text-app-primary">Informasi Dasar</CardTitle>
+                    <CardDescription className="text-app-text-secondary">Masukkan informasi dasar tentang tugas Anda</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <Label htmlFor="title" className="text-sm font-medium text-[#6B7280]">
+                      <Label htmlFor="title" className="text-sm font-medium text-app-text-secondary">
                         Judul Tugas *
                       </Label>
                       <Input
@@ -128,13 +128,13 @@ function AddTask() {
                         value={data.title}
                         onChange={(e) => handleInputChange("title", e.target.value)}
                         placeholder="Masukkan judul tugas..."
-                        className="mt-1 border-[#E5E7EB] focus:border-[#3B82F6]"
+                        className="mt-1 border-app-border focus:border-app-primary bg-app-background text-app-text placeholder:text-app-text-muted"
                         required
                       />
-                      {errors.title && <div className="text-[#FB7185] text-xs mt-1">{errors.title}</div>}
+                      {errors.title && <div className="text-app-error text-xs mt-1">{errors.title}</div>}
                     </div>
                     <div>
-                      <Label htmlFor="description" className="text-sm font-medium text-[#6B7280]">
+                      <Label htmlFor="description" className="text-sm font-medium text-app-text-secondary">
                         Deskripsi
                       </Label>
                       <Textarea
@@ -142,30 +142,30 @@ function AddTask() {
                         value={data.description}
                         onChange={(e) => handleInputChange("description", e.target.value)}
                         placeholder="Jelaskan detail tugas Anda..."
-                        className="mt-1 min-h-[100px] border-[#E5E7EB] focus:border-[#3B82F6]"
+                        className="mt-1 min-h-[100px] border-app-border focus:border-app-primary bg-app-background text-app-text placeholder:text-app-text-muted"
                       />
-                      {errors.description && <div className="text-[#FB7185] text-xs mt-1">{errors.description}</div>}
+                      {errors.description && <div className="text-app-error text-xs mt-1">{errors.description}</div>}
                     </div>
                   </CardContent>
                 </Card>
 
                 {/* Additional Notes */}
-                <Card className="bg-white border border-[#E5E7EB] hover:shadow-md hover:border-[#3B82F6] transition">
+                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
                   <CardHeader>
-                    <CardTitle className="text-[#2563EB] flex items-center">
+                    <CardTitle className="text-app-primary flex items-center">
                       <FileText className="mr-2 h-5 w-5" />
                       Catatan Tambahan
                     </CardTitle>
-                    <CardDescription className="text-[#6B7280]">Tambahkan catatan atau informasi tambahan</CardDescription>
+                    <CardDescription className="text-app-text-secondary">Tambahkan catatan atau informasi tambahan</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Textarea
                       value={data.notes}
                       onChange={(e) => handleInputChange("notes", e.target.value)}
                       placeholder="Tambahkan catatan, checklist, atau informasi tambahan..."
-                      className="min-h-[120px] border-[#E5E7EB] focus:border-[#3B82F6]"
+                      className="min-h-[120px] border-app-border focus:border-app-primary bg-app-background text-app-text placeholder:text-app-text-muted"
                     />
-                    {errors.notes && <div className="text-[#FB7185] text-xs mt-1">{errors.notes}</div>}
+                    {errors.notes && <div className="text-app-error text-xs mt-1">{errors.notes}</div>}
                   </CardContent>
                 </Card>
               </div>
@@ -173,37 +173,37 @@ function AddTask() {
               {/* Sidebar */}
               <div className="space-y-6">
                 {/* Task Settings */}
-                <Card className="bg-white border border-[#E5E7EB] hover:shadow-md hover:border-[#3B82F6] transition">
+                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
                   <CardHeader>
-                    <CardTitle className="text-[#2563EB]">Pengaturan Tugas</CardTitle>
-                    <CardDescription className="text-[#6B7280]">Atur prioritas dan kategori tugas</CardDescription>
+                    <CardTitle className="text-app-primary">Pengaturan Tugas</CardTitle>
+                    <CardDescription className="text-app-text-secondary">Atur prioritas dan kategori tugas</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <Label className="text-sm font-medium text-[#6B7280] flex items-center mb-2">
+                      <Label className="text-sm font-medium text-app-text-secondary flex items-center mb-2">
                         <Flag className="mr-2 h-4 w-4" />
                         Prioritas
                       </Label>
                       <Select value={data.priority} onValueChange={(value) => handleInputChange("priority", value)}>
-                        <SelectTrigger className="border-[#E5E7EB] focus:border-[#3B82F6]">
+                        <SelectTrigger className="border-app-border focus:border-app-primary bg-app-background text-app-text">
                           <SelectValue placeholder="Pilih prioritas" />
                         </SelectTrigger>
-                        <SelectContent className="bg-white border border-[#E5E7EB] shadow-lg text-[#2563EB]">
-                          <SelectItem value="high" className="hover:bg-[#E0F2FE] text-[#2563EB]">
+                        <SelectContent className="bg-app-background-secondary border border-app-border shadow-lg text-app-text">
+                          <SelectItem value="high" className="hover:bg-app-primary-light text-app-text">
                             <div className="flex items-center">
-                              <div className="w-3 h-3 bg-[#3B82F6] rounded-full mr-2"></div>
+                              <div className="w-3 h-3 bg-app-error rounded-full mr-2"></div>
                               Tinggi
                             </div>
                           </SelectItem>
-                          <SelectItem value="medium" className="hover:bg-[#E0F2FE] text-[#2563EB]">
+                          <SelectItem value="medium" className="hover:bg-app-warning/20 text-app-text">
                             <div className="flex items-center">
-                              <div className="w-3 h-3 bg-[#2563EB] rounded-full mr-2"></div>
+                              <div className="w-3 h-3 bg-app-warning rounded-full mr-2"></div>
                               Sedang
                             </div>
                           </SelectItem>
-                          <SelectItem value="low" className="hover:bg-[#E0F2FE] text-[#2563EB]">
+                          <SelectItem value="low" className="hover:bg-app-border/20 text-app-text">
                             <div className="flex items-center">
-                              <div className="w-3 h-3 bg-[#E5E7EB] rounded-full mr-2"></div>
+                              <div className="w-3 h-3 bg-app-border rounded-full mr-2"></div>
                               Rendah
                             </div>
                           </SelectItem>
@@ -214,24 +214,24 @@ function AddTask() {
                           <Badge className={getPriorityColor(data.priority)}>{getPriorityText(data.priority)}</Badge>
                         </div>
                       )}
-                      {errors.priority && <div className="text-[#FB7185] text-xs mt-1">{errors.priority}</div>}
+                      {errors.priority && <div className="text-app-error text-xs mt-1">{errors.priority}</div>}
                     </div>
 
                     <div>
-                      <Label className="text-sm font-medium text-[#6B7280] flex items-center mb-2">
+                      <Label className="text-sm font-medium text-app-text-secondary flex items-center mb-2">
                         <Tag className="mr-2 h-4 w-4" />
                         Kategori
                       </Label>
                       <Select value={data.category} onValueChange={(value) => handleInputChange("category", value)}>
-                        <SelectTrigger className="border-[#E5E7EB] focus:border-[#3B82F6]">
+                        <SelectTrigger className="border-app-border focus:border-app-primary bg-app-background text-app-text">
                           <SelectValue placeholder="Pilih kategori" />
                         </SelectTrigger>
-                        <SelectContent className="bg-white border border-[#E5E7EB] shadow-lg text-[#2563EB]">
+                        <SelectContent className="bg-app-background-secondary border border-app-border shadow-lg text-app-text">
                           {categories.map((category) => (
                             <SelectItem
                               key={category}
                               value={category}
-                              className="hover:bg-[#E0F2FE] text-[#2563EB]"
+                              className="hover:bg-app-primary-light text-app-text"
                             >
                               {category}
                             </SelectItem>
@@ -240,16 +240,16 @@ function AddTask() {
                       </Select>
                       {data.category && (
                         <div className="mt-2">
-                          <Badge variant="outline" className="border-[#3B82F6] text-[#2563EB]">{data.category}</Badge>
+                          <Badge variant="outline" className="border-app-primary text-app-primary">{data.category}</Badge>
                         </div>
                       )}
-                      {errors.category && <div className="text-[#FB7185] text-xs mt-1">{errors.category}</div>}
+                      {errors.category && <div className="text-app-error text-xs mt-1">{errors.category}</div>}
                     </div>
 
                     <div>
                       <Label
                         htmlFor="dueDate"
-                        className="text-sm font-medium text-[#6B7280] flex items-center mb-2"
+                        className="text-sm font-medium text-app-text-secondary flex items-center mb-2"
                       >
                         <Calendar className="mr-2 h-4 w-4" />
                         Tenggat Waktu
@@ -259,36 +259,36 @@ function AddTask() {
                         type="date"
                         value={data.dueDate}
                         onChange={(e) => handleInputChange("dueDate", e.target.value)}
-                        className="border-[#E5E7EB] focus:border-[#3B82F6]"
+                        className="border-app-border focus:border-app-primary bg-app-background text-app-text"
                         min={new Date().toISOString().split("T")[0]}
                       />
-                      {errors.dueDate && <div className="text-[#FB7185] text-xs mt-1">{errors.dueDate}</div>}
+                      {errors.dueDate && <div className="text-app-error text-xs mt-1">{errors.dueDate}</div>}
                     </div>
                   </CardContent>
                 </Card>
 
                 {/* Preview */}
-                <Card className="bg-white border border-[#E5E7EB] hover:shadow-md hover:border-[#3B82F6] transition">
+                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
                   <CardHeader>
-                    <CardTitle className="text-[#2563EB]">Preview</CardTitle>
-                    <CardDescription className="text-[#6B7280]">Pratinjau tugas yang akan dibuat</CardDescription>
+                    <CardTitle className="text-app-primary">Preview</CardTitle>
+                    <CardDescription className="text-app-text-secondary">Pratinjau tugas yang akan dibuat</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
                       <div>
-                        <h4 className="font-semibold text-[#2563EB]">{data.title || "Judul tugas akan muncul di sini"}</h4>
+                        <h4 className="font-semibold text-app-primary">{data.title || "Judul tugas akan muncul di sini"}</h4>
                         {data.description && (
-                          <p className="text-sm text-[#6B7280] mt-1 line-clamp-2">{data.description}</p>
+                          <p className="text-sm text-app-text-secondary mt-1 line-clamp-2">{data.description}</p>
                         )}
                       </div>
                       <div className="flex flex-wrap gap-2">
                         {data.priority && (
                           <Badge className={getPriorityColor(data.priority)}>{getPriorityText(data.priority)}</Badge>
                         )}
-                        {data.category && <Badge variant="outline" className="border-[#3B82F6] text-[#2563EB]">{data.category}</Badge>}
+                        {data.category && <Badge variant="outline" className="border-app-primary text-app-primary">{data.category}</Badge>}
                       </div>
                       {data.dueDate && (
-                        <p className="text-xs text-[#6B7280]">
+                        <p className="text-xs text-app-text-secondary">
                           Tenggat: {new Date(data.dueDate).toLocaleDateString("id-ID")}
                         </p>
                       )}
@@ -297,13 +297,13 @@ function AddTask() {
                 </Card>
 
                 {/* Action Buttons */}
-                <Card className="bg-white border border-[#E5E7EB] hover:shadow-md hover:border-[#3B82F6] transition">
+                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
                   <CardContent className="pt-6">
                     <div className="space-y-3">
                       <Button
                         type="submit"
                         disabled={isSubmitting || !(data.title || "").trim()}
-                        className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white font-semibold"
+                        className="w-full bg-app-primary hover:bg-app-primary-dark text-white font-semibold"
                       >
                         {isSubmitting ? (
                           <>
@@ -321,7 +321,7 @@ function AddTask() {
                         type="button"
                         variant="outline"
                         onClick={handleReset}
-                        className="w-full border-[#3B82F6] text-[#2563EB] hover:bg-[#E0F2FE]"
+                        className="w-full border-app-primary text-app-primary hover:bg-app-primary-light"
                         disabled={isSubmitting}
                       >
                         <X className="mr-2 h-4 w-4" />
