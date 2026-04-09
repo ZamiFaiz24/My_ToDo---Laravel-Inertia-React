@@ -41,9 +41,9 @@
         --app-background-secondary: #fafafa;
         --app-background-accent: #e6f9f8;
 
-        --app-primary: #4ecdc4;
-        --app-primary-light: rgba(78, 205, 196, 0.2);
-        --app-primary-dark: rgba(78, 205, 196, 0.8);
+        --app-primary: #3b82f6;
+        --app-primary-light: rgba(59, 130, 246, 0.2);
+        --app-primary-dark: rgba(59, 130, 246, 0.8);
         --app-primary-foreground: #1a535c;
 
         --app-secondary: #1a535c;
@@ -64,16 +64,16 @@
         --app-text-secondary: #1a535c;
         --app-text-muted: #4b5563;
 
-        --app-border: rgba(78, 205, 196, 0.3);
-        --app-border-light: rgba(78, 205, 196, 0.1);
+        --app-border: rgba(59, 130, 246, 0.3);
+        --app-border-light: rgba(59, 130, 246, 0.1);
 
-        --app-button-primary: #4ecdc4;
-        --app-button-primary-hover: #3dbbb3;
-        --app-button-primary-text: #1a535c;
+        --app-button-primary: #3b82f6;
+        --app-button-primary-hover: #2563eb;
+        --app-button-primary-text: #ffffff;
 
-        --app-input-background: rgba(78, 205, 196, 0.1);
-        --app-input-border: rgba(78, 205, 196, 0.3);
-        --app-input-border-focus: #4ecdc4;
+        --app-input-background: rgba(59, 130, 246, 0.1);
+        --app-input-border: rgba(59, 130, 246, 0.3);
+        --app-input-border-focus: #3b82f6;
     }
 
     /* DARK MODE */

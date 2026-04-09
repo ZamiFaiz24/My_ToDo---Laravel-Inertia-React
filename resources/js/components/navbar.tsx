@@ -34,7 +34,7 @@ export default function Navbar() {
           {/* Logo and Brand */}
           <Link href="/dashboard" className="flex items-center space-x-3">
             <div className="bg-app-primary p-2 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-              <ListTodo className="h-6 w-6 text-white" />
+              <ListTodo className="h-6 w-6 text-white font-bold" />
             </div>
             <h1 className="text-xl font-bold text-app-primary hidden xs:inline">My ToDo</h1>
           </Link>
@@ -53,7 +53,7 @@ export default function Navbar() {
                         : 'text-app-primary hover:text-app-primary-dark'
                     }`}
                   >
-                    <item.icon className="h-4 w-4 mr-2" />
+                    <item.icon className={`h-4 w-4 mr-2 ${isActive ? 'text-white' : 'text-app-primary'}`} />
                     {item.name}
                   </Button>
                 </Link>
@@ -73,7 +73,7 @@ export default function Navbar() {
                 size="icon"
                 className="text-app-primary hover:bg-app-primary-light"
               >
-                <Bell className="h-5 w-5" />
+                <Bell className="h-5 w-5 text-app-primary" />
               </Button>
               <Badge className="absolute -top-2 -right-2 bg-app-error text-white text-xs px-1.5 min-w-[1.25rem] h-5 flex items-center justify-center">
                 3
@@ -89,7 +89,7 @@ export default function Navbar() {
                   url === '/settings' ? 'bg-app-primary text-white' : ''
                 }`}
               >
-                <Settings className="h-5 w-5" />
+                <Settings className={`h-5 w-5 ${url === '/settings' ? 'text-white' : 'text-app-primary'}`} />
               </Button>
             </Link>
 
@@ -157,7 +157,7 @@ export default function Navbar() {
                         : 'text-app-primary hover:text-app-primary-dark'
                     }`}
                   >
-                    <item.icon className="h-4 w-4 mr-2" />
+                    <item.icon className={`h-4 w-4 mr-2 ${isActive ? 'text-white' : 'text-app-primary'}`} />
                     {item.name}
                   </Button>
                 </Link>

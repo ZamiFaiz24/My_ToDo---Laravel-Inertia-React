@@ -10,11 +10,11 @@ export default function AppearanceToggleDropdown({ className = '', ...props }: H
     const getCurrentIcon = () => {
         switch (appearance) {
             case 'dark':
-                return <Moon className="h-5 w-5" />;
+                return <Moon className="h-5 w-5 text-app-primary" />;
             case 'light':
-                return <Sun className="h-5 w-5" />;
+                return <Sun className="h-5 w-5 text-app-primary" />;
             default:
-                return <Monitor className="h-5 w-5" />;
+                return <Monitor className="h-5 w-5 text-app-primary" />;
         }
     };
 
@@ -22,7 +22,7 @@ export default function AppearanceToggleDropdown({ className = '', ...props }: H
         <div className={className} {...props}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-9 w-9 rounded-md">
+                    <Button variant="ghost" size="icon" className="h-9 w-9 rounded-md text-app-primary hover:bg-app-primary-light">
                         {getCurrentIcon()}
                         <span className="sr-only">Toggle theme</span>
                     </Button>
@@ -30,19 +30,19 @@ export default function AppearanceToggleDropdown({ className = '', ...props }: H
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={() => updateAppearance('light')}>
                         <span className="flex items-center gap-2">
-                            <Sun className="h-5 w-5" />
+                            <Sun className="h-5 w-5 text-app-primary" />
                             Light
                         </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => updateAppearance('dark')}>
                         <span className="flex items-center gap-2">
-                            <Moon className="h-5 w-5" />
+                            <Moon className="h-5 w-5 text-app-primary" />
                             Dark
                         </span>
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => updateAppearance('system')}>
                         <span className="flex items-center gap-2">
-                            <Monitor className="h-5 w-5" />
+                            <Monitor className="h-5 w-5 text-app-primary" />
                             System
                         </span>
                     </DropdownMenuItem>
