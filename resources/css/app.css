@@ -8,7 +8,7 @@
         --radius: 0.5rem;
 
         /* === CORE (Tailwind / shadcn style) === */
-        --background: 0 0% 100%;
+        --background: 0 0% 99%;
         --foreground: 222 47% 11%;
 
         --card: 0 0% 100%;
@@ -24,7 +24,7 @@
         --secondary-foreground: 222 47% 11%;
 
         --muted: 210 40% 96%;
-        --muted-foreground: 215 20% 40%;
+        --muted-foreground: 215 20% 42%;
 
         --accent: 210 40% 96%;
         --accent-foreground: 222 47% 11%;
@@ -32,56 +32,71 @@
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
 
-        --border: 214 32% 91%;
-        --input: 214 32% 91%;
+        --border: 214 28% 88%;
+        --input: 214 28% 88%;
         --ring: 221 83% 53%;
 
         /* CUSTOM APP THEME (LIGHT) */
-        --app-background: #f7fff7;
-        --app-background-secondary: #fafafa;
-        --app-background-accent: #e6f9f8;
+        --app-background: #f8fafc;
+        --app-background-secondary: #ffffff;
+        --app-background-accent: #eef6ff;
 
         --app-primary: #3b82f6;
-        --app-primary-light: rgba(59, 130, 246, 0.2);
-        --app-primary-dark: rgba(59, 130, 246, 0.8);
-        --app-primary-foreground: #1a535c;
+        --app-primary-light: rgba(59, 130, 246, 0.12);
+        --app-primary-dark: #2563eb;
+        --app-primary-foreground: #eff6ff;
 
-        --app-secondary: #1a535c;
-        --app-secondary-light: rgba(26, 83, 92, 0.1);
-        --app-secondary-dark: rgba(26, 83, 92, 0.9);
-        --app-secondary-foreground: #f7fff7;
+        --app-secondary: #0f766e;
+        --app-secondary-light: rgba(15, 118, 110, 0.1);
+        --app-secondary-dark: #0f766e;
+        --app-secondary-foreground: #ecfeff;
 
-        --app-accent: #ffe66d;
-        --app-accent-light: rgba(255, 230, 109, 0.2);
-        --app-accent-dark: rgba(255, 230, 109, 0.8);
-        --app-accent-foreground: #1a535c;
+        --app-accent: #f59e0b;
+        --app-accent-light: rgba(245, 158, 11, 0.12);
+        --app-accent-dark: #d97706;
+        --app-accent-foreground: #fffbeb;
 
         --app-success: #4ecdc4;
+        --app-success-light: rgba(78, 205, 196, 0.12);
+        --app-success-foreground: #0f172a;
         --app-warning: #d97706;
+        --app-warning-light: rgba(217, 119, 6, 0.12);
+        --app-warning-foreground: #0f172a;
         --app-error: #dc2626;
+        --app-error-light: rgba(220, 38, 38, 0.12);
+        --app-error-foreground: #fff1f2;
 
         --app-text: #0f172a;
-        --app-text-secondary: #1a535c;
-        --app-text-muted: #4b5563;
+        --app-text-secondary: #334155;
+        --app-text-muted: #64748b;
+        --app-text-inverse: #ffffff;
 
-        --app-border: rgba(59, 130, 246, 0.3);
-        --app-border-light: rgba(59, 130, 246, 0.1);
+        --app-border: rgba(148, 163, 184, 0.45);
+        --app-border-light: rgba(148, 163, 184, 0.2);
+        --app-border-focus: #60a5fa;
 
         --app-button-primary: #3b82f6;
         --app-button-primary-hover: #2563eb;
         --app-button-primary-text: #ffffff;
+        --app-button-secondary: #0f766e;
+        --app-button-secondary-hover: #115e59;
+        --app-button-secondary-text: #ecfeff;
+        --app-button-gradient: linear-gradient(135deg, #3b82f6, #0f766e);
+        --app-button-gradient-hover: linear-gradient(135deg, #2563eb, #115e59);
 
-        --app-input-background: rgba(59, 130, 246, 0.1);
-        --app-input-border: rgba(59, 130, 246, 0.3);
+        --app-input-background: #ffffff;
+        --app-input-border: rgba(148, 163, 184, 0.45);
         --app-input-border-focus: #3b82f6;
+        --app-input-text: #0f172a;
+        --app-input-placeholder: #64748b;
     }
 
     /* DARK MODE */
     .dark {
-        --background: 222 47% 11%;
+        --background: 222 47% 8%;
         --foreground: 210 40% 98%;
 
-        --card: 222 47% 13%;
+        --card: 222 47% 12%;
         --card-foreground: 210 40% 98%;
 
         --popover: 222 47% 13%;
@@ -94,34 +109,68 @@
         --secondary-foreground: 210 40% 98%;
 
         --muted: 217 33% 17%;
-        --muted-foreground: 215 20% 65%;
+        --muted-foreground: 215 20% 72%;
 
         --accent: 217 33% 17%;
         --accent-foreground: 210 40% 98%;
 
-        --border: 217 33% 17%;
-        --input: 217 33% 17%;
+        --border: 217 33% 20%;
+        --input: 217 33% 20%;
         --ring: 224 76% 48%;
 
         /* === Custom App Dark === */
-        --app-background: #0f172a;
-        --app-background-secondary: #111827;
+        --app-background: #020617;
+        --app-background-secondary: #0f172a;
         --app-background-accent: #1e293b;
 
-        --app-primary: #4ecdc4;
-        --app-primary-light: rgba(78, 205, 196, 0.2);
-        --app-primary-dark: rgba(78, 205, 196, 0.8);
+        --app-primary: #60a5fa;
+        --app-primary-light: rgba(96, 165, 250, 0.15);
+        --app-primary-dark: #3b82f6;
+        --app-primary-foreground: #eff6ff;
 
-        --app-text: #f1f5f9;
-        --app-text-secondary: #cbd5f5;
+        --app-secondary: #2dd4bf;
+        --app-secondary-light: rgba(45, 212, 191, 0.12);
+        --app-secondary-dark: #14b8a6;
+        --app-secondary-foreground: #ecfeff;
+
+        --app-accent: #fbbf24;
+        --app-accent-light: rgba(251, 191, 36, 0.12);
+        --app-accent-dark: #f59e0b;
+        --app-accent-foreground: #fffbeb;
+
+        --app-success: #34d399;
+        --app-success-light: rgba(52, 211, 153, 0.12);
+        --app-success-foreground: #022c22;
+        --app-warning: #f59e0b;
+        --app-warning-light: rgba(245, 158, 11, 0.12);
+        --app-warning-foreground: #1f1300;
+        --app-error: #f87171;
+        --app-error-light: rgba(248, 113, 113, 0.12);
+        --app-error-foreground: #fff1f2;
+
+        --app-text: #f8fafc;
+        --app-text-secondary: #cbd5e1;
         --app-text-muted: #94a3b8;
+        --app-text-inverse: #020617;
 
-        --app-border: #1e293b;
-        --app-border-light: #334155;
+        --app-border: rgba(148, 163, 184, 0.2);
+        --app-border-light: rgba(148, 163, 184, 0.3);
+        --app-border-focus: #60a5fa;
 
-        --app-button-primary: #4ecdc4;
-        --app-button-primary-hover: #3dbbb3;
-        --app-button-primary-text: #0f172a;
+        --app-button-primary: #60a5fa;
+        --app-button-primary-hover: #3b82f6;
+        --app-button-primary-text: #eff6ff;
+        --app-button-secondary: #2dd4bf;
+        --app-button-secondary-hover: #14b8a6;
+        --app-button-secondary-text: #022c22;
+        --app-button-gradient: linear-gradient(135deg, #60a5fa, #2dd4bf);
+        --app-button-gradient-hover: linear-gradient(135deg, #3b82f6, #14b8a6);
+
+        --app-input-background: #0f172a;
+        --app-input-border: rgba(148, 163, 184, 0.2);
+        --app-input-border-focus: #60a5fa;
+        --app-input-text: #f8fafc;
+        --app-input-placeholder: #94a3b8;
     }
 
     * {
@@ -131,6 +180,7 @@
     body {
         @apply bg-background text-foreground;
         font-family: 'Instrument Sans', ui-sans-serif, system-ui;
+        color-scheme: light dark;
     }
 }
 
@@ -199,4 +249,25 @@
     background: var(--app-background-secondary);
     border: 1px solid var(--app-border);
     color: var(--app-primary);
+}
+
+.react-calendar__tile {
+    border-radius: 0.5rem;
+}
+
+.react-calendar__tile:hover {
+    background: var(--app-primary-light);
+}
+
+.dark .react-calendar button {
+    color: var(--app-text);
+}
+
+.dark .react-calendar__tile--now {
+    background: rgba(96, 165, 250, 0.12);
+}
+
+.dark .react-calendar__tile--active {
+    background: var(--app-primary) !important;
+    color: white !important;
 }

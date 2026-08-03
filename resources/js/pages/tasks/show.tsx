@@ -38,6 +38,19 @@ export default function TaskShow() {
     }
   }
 
+  const getPriorityLabel = (priority: string) => {
+    switch (priority) {
+      case 'high':
+        return 'Tinggi'
+      case 'medium':
+        return 'Sedang'
+      case 'low':
+        return 'Rendah'
+      default:
+        return priority
+    }
+  }
+
   const handleDelete = () => {
     if (!confirm('Yakin ingin menghapus tugas ini?')) return
     // sesuaikan endpoint jika route berbeda
@@ -100,33 +113,33 @@ export default function TaskShow() {
                       <CardTitle className="text-app-primary text-xl font-semibold">
                         {task.title}
                       </CardTitle>
-                      <CardDescription className="text-[#6B7280] mt-1">
+                      <CardDescription className="text-app-text-secondary mt-1">
                         {task.category ?? 'Tanpa kategori'} •{' '}
                         {task.due_date ? (
-                          <span className="inline-flex items-center text-sm text-[#6B7280]">
+                          <span className="inline-flex items-center text-sm text-app-text-secondary">
                             <Calendar className="h-4 w-4 mr-1" />
                             {new Date(task.due_date).toLocaleDateString('id-ID')}
                           </span>
                         ) : (
-                          <span className="text-sm text-[#6B7280]">Tidak ada tenggat</span>
+                          <span className="text-sm text-app-text-secondary">Tidak ada tenggat</span>
                         )}
                       </CardDescription>
                     </div>
                     <div className="text-right">
-                      <Badge className={getPriorityColor(task.priority)}>{task.priority}</Badge>
+                      <Badge className={getPriorityColor(task.priority)}>{getPriorityLabel(task.priority)}</Badge>
                       {task.assigned_to && (
-                        <div className="text-xs text-[#6B7280] mt-2">{task.assigned_to}</div>
+                        <div className="text-xs text-app-text-secondary mt-2">{task.assigned_to}</div>
                       )}
                     </div>
                   </div>
                 </CardHeader>
 
                 <CardContent>
-                  <div className="prose max-w-none text-[#0F172A]">
+                  <div className="prose max-w-none text-app-text">
                     {task.description ? (
                       <p>{task.description}</p>
                     ) : (
-                      <p className="text-[#6B7280]">Tidak ada deskripsi untuk tugas ini.</p>
+                      <p className="text-app-text-secondary">Tidak ada deskripsi untuk tugas ini.</p>
                     )}
                   </div>
 
@@ -141,10 +154,10 @@ export default function TaskShow() {
                       <ul className="space-y-2">
                         {task.checklist.map((item) => (
                           <li key={item.id} className="flex items-center gap-3">
-                            <div className={`h-5 w-5 rounded-sm flex items-center justify-center ${item.done ? 'bg-[#3B82F6] text-white' : 'border border-[#E5E7EB] text-[#6B7280]'}`}>
+                            <div className={`h-5 w-5 rounded-sm flex items-center justify-center ${item.done ? 'bg-app-primary text-white' : 'border border-app-border text-app-text-secondary'}`}>
                               {item.done ? <CheckCircle2 className="h-4 w-4" /> : null}
                             </div>
-                            <span className={`${item.done ? 'line-through text-[#9CA3AF]' : 'text-[#0F172A]'}`}>
+                            <span className={`${item.done ? 'line-through text-app-text-muted' : 'text-app-text'}`}>
                               {item.text}
                             </span>
                           </li>
@@ -156,13 +169,13 @@ export default function TaskShow() {
 
                   {/* Attachments */}
                   <div>
-                    <h4 className="text-sm font-semibold text-[#2563EB] mb-2 flex items-center gap-2">
+                    <h4 className="text-sm font-semibold text-app-primary mb-2 flex items-center gap-2">
                       <Paperclip className="h-4 w-4" /> Lampiran
                     </h4>
                     {task.attachments && task.attachments.length > 0 ? (
                       <ul className="space-y-2">
                         {task.attachments.map((att) => (
-                          <li key={att.id} className="flex items-center justify-between bg-[#F8FAFF] border border-[#E5E7EB] p-2 rounded-md">
+                          <li key={att.id} className="flex items-center justify-between bg-app-background border border-app-border p-2 rounded-md">
                             <div className="flex items-center gap-3">
                               <Paperclip className="h-4 w-4 text-app-primary" />
                               <div className="text-sm text-app-primary">{att.name}</div>
@@ -170,13 +183,13 @@ export default function TaskShow() {
                             {att.url ? (
                               <a href={att.url} className="text-sm text-app-primary underline" target="_blank" rel="noreferrer">Download</a>
                             ) : (
-                              <span className="text-xs text-[#6B7280]">—</span>
+                              <span className="text-xs text-app-text-secondary">—</span>
                             )}
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <div className="text-sm text-[#6B7280]">Tidak ada lampiran.</div>
+                      <div className="text-sm text-app-text-secondary">Tidak ada lampiran.</div>
                     )}
                   </div>
                 </CardContent>
@@ -185,43 +198,43 @@ export default function TaskShow() {
 
             {/* Right sidebar - metadata */}
             <div className="space-y-4">
-              <Card className="bg-white border border-[#E5E7EB] shadow-sm">
+              <Card className="bg-app-background-secondary border border-app-border shadow-sm">
                 <CardContent>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="text-sm text-[#6B7280]">ID</div>
-                    <div className="text-sm font-medium text-[#0F172A]">#{task.id}</div>
+                    <div className="text-sm text-app-text-secondary">ID</div>
+                    <div className="text-sm font-medium text-app-text">#{task.id}</div>
                   </div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="text-sm text-[#6B7280]">Status</div>
-                    <div className={`text-sm font-medium ${task.completed ? 'text-[#10B981]' : 'text-[#2563EB]'}`}>
+                    <div className="text-sm text-app-text-secondary">Status</div>
+                    <div className={`text-sm font-medium ${task.completed ? 'text-app-success' : 'text-app-primary'}`}>
                       {task.completed ? 'Selesai' : 'Belum Selesai'}
                     </div>
                   </div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="text-sm text-[#6B7280]">Prioritas</div>
+                    <div className="text-sm text-app-text-secondary">Prioritas</div>
                     <Badge className={getPriorityColor(task.priority)}>{task.priority}</Badge>
                   </div>
                   <div className="flex items-center justify-between mb-3">
-                    <div className="text-sm text-[#6B7280]">Dibuat</div>
-                    <div className="text-sm text-[#6B7280]">{task.created_at ? new Date(task.created_at).toLocaleString('id-ID') : '-'}</div>
+                    <div className="text-sm text-app-text-secondary">Dibuat</div>
+                    <div className="text-sm text-app-text-secondary">{task.created_at ? new Date(task.created_at).toLocaleString('id-ID') : '-'}</div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="text-sm text-[#6B7280]">Terakhir diperbarui</div>
-                    <div className="text-sm text-[#6B7280]">{task.updated_at ? new Date(task.updated_at).toLocaleString('id-ID') : '-'}</div>
+                    <div className="text-sm text-app-text-secondary">Terakhir diperbarui</div>
+                    <div className="text-sm text-app-text-secondary">{task.updated_at ? new Date(task.updated_at).toLocaleString('id-ID') : '-'}</div>
                   </div>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white border border-[#E5E7EB] shadow-sm">
+              <Card className="bg-app-background-secondary border border-app-border shadow-sm">
                 <CardContent>
-                  <h4 className="text-sm font-semibold text-[#2563EB] mb-2">Tindakan Cepat</h4>
+                  <h4 className="text-sm font-semibold text-app-primary mb-2">Tindakan Cepat</h4>
                   <div className="flex flex-col gap-2">
                     <Link href={`/task/${task.id}/edit`}>
-                      <Button className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white">
+                      <Button className="w-full bg-app-primary hover:bg-app-primary-dark text-app-text-inverse">
                         <Edit className="mr-2 h-4 w-4" /> Edit Tugas
                       </Button>
                     </Link>
-                    <Button variant="outline" className="w-full text-[#FB7185]" onClick={handleDelete}>
+                    <Button variant="outline" className="w-full text-app-error border-app-border hover:bg-app-error-light" onClick={handleDelete}>
                       <Trash2 className="mr-2 h-4 w-4" /> Hapus Tugas
                     </Button>
                   </div>

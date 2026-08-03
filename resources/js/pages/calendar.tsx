@@ -36,6 +36,22 @@ export default function CalendarPage() {
         }
     }
 
+    function getPriorityLabel(priority: string): string {
+        switch (priority.toLowerCase()) {
+            case "high":
+            case "tinggi":
+                return "Tinggi"
+            case "medium":
+            case "sedang":
+                return "Sedang"
+            case "low":
+            case "rendah":
+                return "Rendah"
+            default:
+                return priority
+        }
+    }
+
     return (
         <div className="min-h-screen bg-app-background">
             <Head title="Kalender" />
@@ -94,11 +110,11 @@ export default function CalendarPage() {
                                                 <Card className="bg-app-background border border-app-border shadow-sm hover:shadow-md transition">
                                                     <CardContent className="flex items-center gap-3 py-3">
                                                         <Badge className={getPriorityColor(task.priority)}>
-                                                            {task.priority}
+                                                            {getPriorityLabel(task.priority)}
                                                         </Badge>
                                                         <div>
                                                             <div className="text-app-primary font-semibold">{task.title}</div>
-                                                            <div className="text-xs text-[#6B7280]">Prioritas: {task.priority}</div>
+                                                            <div className="text-xs text-[#6B7280]">Prioritas: {getPriorityLabel(task.priority)}</div>
                                                         </div>
                                                     </CardContent>
                                                 </Card>

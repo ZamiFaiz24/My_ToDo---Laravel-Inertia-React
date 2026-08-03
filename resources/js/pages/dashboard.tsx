@@ -90,6 +90,19 @@ function Dashboard() {
     }
   }
 
+  const getPriorityLabel = (priority: string) => {
+    switch (priority) {
+      case 'high':
+        return 'Tinggi'
+      case 'medium':
+        return 'Sedang'
+      case 'low':
+        return 'Rendah'
+      default:
+        return priority
+    }
+  }
+
   const toggleTodo = (id: number) => {
     alert(`Status tugas dengan ID ${id} diubah`)
   }
@@ -299,7 +312,7 @@ function Dashboard() {
                                 : 'bg-app-border text-app-text'
                             }
                           >
-                            {todo.priority}
+                            {getPriorityLabel(todo.priority)}
                           </Badge>
                           <Badge variant="outline" className="text-xs border-app-border text-app-text-secondary">
                             {todo.category}

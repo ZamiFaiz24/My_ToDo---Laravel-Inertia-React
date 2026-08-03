@@ -27,6 +27,12 @@ export default function StatsPage() {
     low: tasks.filter((t) => t.priority === "low").length,
   }
 
+  const priorityLabels = {
+    high: "Tinggi",
+    medium: "Sedang",
+    low: "Rendah",
+  }
+
   return (
     <>
       <Head title="Statistik" />
@@ -97,19 +103,19 @@ export default function StatsPage() {
                         <span className="w-6 h-6 bg-app-error text-white rounded-full flex items-center justify-center font-bold mb-1">
                           {priorityStats.high}
                         </span>
-                        <span className="text-xs text-app-primary font-semibold">Tinggi</span>
+                        <span className="text-xs text-app-primary font-semibold">{priorityLabels.high}</span>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="w-6 h-6 bg-app-primary text-white rounded-full flex items-center justify-center font-bold mb-1">
                           {priorityStats.medium}
                         </span>
-                        <span className="text-xs text-app-primary font-semibold">Sedang</span>
+                        <span className="text-xs text-app-primary font-semibold">{priorityLabels.medium}</span>
                       </div>
                       <div className="flex flex-col items-center">
                         <span className="w-6 h-6 bg-app-border text-app-text rounded-full flex items-center justify-center font-bold mb-1">
                           {priorityStats.low}
                         </span>
-                        <span className="text-xs text-app-primary font-semibold">Rendah</span>
+                        <span className="text-xs text-app-primary font-semibold">{priorityLabels.low}</span>
                       </div>
                     </div>
                   </div>
