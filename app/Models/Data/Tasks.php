@@ -2,11 +2,13 @@
 
 namespace App\Models\Data;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Tasks extends Model
 {
     protected $fillable = [
+        'user_id',
         'title',
         'description',
         'priority',
@@ -19,4 +21,9 @@ class Tasks extends Model
         'completed' => 'boolean',
         'due_date' => 'date',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

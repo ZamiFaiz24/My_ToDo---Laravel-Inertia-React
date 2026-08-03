@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Data\Tasks;
 
 class TaskSeeder extends Seeder
@@ -13,8 +14,11 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
+        $admin = User::where('email', 'admin@mytodo.test')->first();
+
         Tasks::insert([
             [
+                'user_id' => $admin?->id,
                 'title' => 'Todo List App',
                 'description' => 'Membuat aplikasi todo list dengan Laravel dan Inertia.js',
                 'completed' => false,
@@ -23,6 +27,7 @@ class TaskSeeder extends Seeder
                 'category' => 'Laravel Project',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Sistem Pakar Sapi',
                 'description' => 'Implementasi metode Forward Chaining dan Certainty Factor',
                 'completed' => false,
@@ -31,6 +36,7 @@ class TaskSeeder extends Seeder
                 'category' => 'Skripsi',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Web Jual Mobil Aki',
                 'description' => 'Project jual beli mobil aki anak-anak dengan Laravel dan Vue',
                 'completed' => true,
@@ -39,6 +45,7 @@ class TaskSeeder extends Seeder
                 'category' => 'E-commerce',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Coffee Shop UI',
                 'description' => 'Desain frontend untuk coffee shop dengan Tailwind dan Vue',
                 'completed' => false,
@@ -47,6 +54,7 @@ class TaskSeeder extends Seeder
                 'category' => 'Frontend',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Monitoring IoT Perangkat',
                 'description' => 'Menampilkan status perangkat ON/OFF dan log aktivitas',
                 'completed' => false,
@@ -55,6 +63,7 @@ class TaskSeeder extends Seeder
                 'category' => 'IoT Laravel',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Dashboard Laravel + Inertia',
                 'description' => 'Membuat tampilan dashboard user dengan Laravel Inertia Vue',
                 'completed' => true,
@@ -63,6 +72,7 @@ class TaskSeeder extends Seeder
                 'category' => 'Dashboard',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Autentikasi Multi-Level',
                 'description' => 'Menambahkan login untuk admin dan user biasa dengan Laravel Breeze',
                 'completed' => false,
@@ -71,6 +81,7 @@ class TaskSeeder extends Seeder
                 'category' => 'Auth System',
             ],
             [
+                'user_id' => $admin?->id,
                 'title' => 'Book Chapter TI',
                 'description' => 'Menulis bab tentang manajemen insiden dan continuity planning',
                 'completed' => false,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { ListTodo, Plus, Settings, Bell, User, Home, Calendar, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,6 +26,10 @@ export default function Navbar() {
   const url: string = props.url ?? (typeof window !== 'undefined' ? window.location.pathname : '');
   const auth: { user?: { name: string; email: string } } = props.auth ?? {};
   const user = auth?.user ?? { name: 'User', email: '' };
+
+  const handleLogout = () => {
+    router.post('/logout');
+  };
 
   return (
     <nav className="bg-app-background-secondary border-b border-app-border sticky top-0 z-50 shadow-sm transition-colors duration-300 dark:border-app-border-light">
@@ -123,18 +127,18 @@ export default function Navbar() {
                 <DropdownMenuItem asChild>
                   <Link href="/profile" className="flex items-center cursor-pointer">
                     <User className="mr-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span>Profil</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link href="/settings" className="flex items-center cursor-pointer">
                     <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
+                    <span>Pengaturan</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-app-border" />
-                <DropdownMenuItem className="text-app-error cursor-pointer">
-                  <span>Log out</span>
+                <DropdownMenuItem className="text-app-error cursor-pointer" onClick={handleLogout}>
+                  <span>Keluar</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

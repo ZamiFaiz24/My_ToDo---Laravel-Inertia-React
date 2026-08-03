@@ -12,7 +12,7 @@ class TaskController extends Controller
 {
     public function index(): Response
     {
-        $tasks = Tasks::all();
+        $tasks = Tasks::where('user_id', request()->user()->id)->get();
 
         return Inertia::render('dashboard', [
             'tasks' => $tasks,
@@ -21,7 +21,9 @@ class TaskController extends Controller
 
     public function calendar(): Response
     {
-        $tasks = Tasks::select('id', 'title', 'due_date as date', 'priority')->get();
+        $tasks = Tasks::where('user_id', request()->user()->id)
+            ->select('id', 'title', 'due_date as date', 'priority')
+            ->get();
 
         return Inertia::render('calendar', [
             'tasks' => $tasks,
@@ -30,7 +32,9 @@ class TaskController extends Controller
 
     public function stats(): Response
     {
-        $tasks = Tasks::select('id', 'title', 'completed', 'priority')->get();
+        $tasks = Tasks::where('user_id', request()->user()->id)
+            ->select('id', 'title', 'completed', 'priority')
+            ->get();
 
         return Inertia::render('stats', [
             'tasks' => $tasks,
@@ -39,7 +43,7 @@ class TaskController extends Controller
 
     public function show(int $id): Response
     {
-        $task = Tasks::findOrFail($id);
+        $task = Tasks::where('user_id', request()->user()->id)->findOrFail($id);
 
         // render komponen React yang ada di resources/js/pages/tasks/show.tsx
         return Inertia::render('tasks/show', [
@@ -49,7 +53,7 @@ class TaskController extends Controller
 
     public function edit(int $id): Response
     {
-        $task = Tasks::findOrFail($id);
+        $task = Tasks::where('user_id', request()->user()->id)->findOrFail($id);
 
         return Inertia::render('tasks/edit-task', [
             'task' => $task,
@@ -67,6 +71,7 @@ class TaskController extends Controller
         ]);
 
         Tasks::create([
+            'user_id' => $request->user()->id,
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'priority' => $validated['priority'] ?? 'medium',
@@ -80,7 +85,7 @@ class TaskController extends Controller
 
     public function update(Request $request, int $id): RedirectResponse
     {
-        $task = Tasks::findOrFail($id);
+        $task = Tasks::where('user_id', $request->user()->id)->findOrFail($id);
 
         $validated = $request->validate([
             'title' => ['sometimes', 'required', 'string', 'max:255'],
@@ -124,7 +129,7 @@ class TaskController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
-        $task = Tasks::findOrFail($id);
+        $task = Tasks::where('user_id', request()->user()->id)->findOrFail($id);
         $task->delete();
 
         return to_route('dashboard')->with('success', 'Tugas berhasil dihapus.');
