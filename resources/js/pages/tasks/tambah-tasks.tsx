@@ -20,8 +20,6 @@ interface TodoForm {
   priority: "high" | "medium" | "low" | ""
   dueDate: string
   category: string
-  notes: string
-  
 }
 
 const categories = ["Pekerjaan", "Personal", "Kesehatan", "Belajar", "Keluarga", "Hobi", "Keuangan", "Lainnya"]
@@ -34,7 +32,6 @@ function AddTask() {
     priority: "",
     dueDate: "",
     category: "",
-    notes: "",
     })
 
     const handleInputChange = (field: keyof TodoForm, value: string) => {
@@ -149,25 +146,6 @@ function AddTask() {
                   </CardContent>
                 </Card>
 
-                {/* Additional Notes */}
-                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
-                  <CardHeader>
-                    <CardTitle className="text-app-primary flex items-center">
-                      <FileText className="mr-2 h-5 w-5" />
-                      Catatan Tambahan
-                    </CardTitle>
-                    <CardDescription className="text-app-text-secondary">Tambahkan catatan atau informasi tambahan</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Textarea
-                      value={data.notes}
-                      onChange={(e) => handleInputChange("notes", e.target.value)}
-                      placeholder="Tambahkan catatan, checklist, atau informasi tambahan..."
-                      className="min-h-[120px] border-app-border focus:border-app-primary bg-app-background text-app-text placeholder:text-app-text-muted"
-                    />
-                    {errors.notes && <div className="text-app-error text-xs mt-1">{errors.notes}</div>}
-                  </CardContent>
-                </Card>
               </div>
 
               {/* Sidebar */}
