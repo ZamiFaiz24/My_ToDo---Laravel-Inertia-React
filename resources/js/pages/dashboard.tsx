@@ -91,7 +91,7 @@ function Dashboard() {
   }
 
   const toggleTodo = (id: number) => {
-    alert(`Toggled todo id: ${id}`)
+    alert(`Status tugas dengan ID ${id} diubah`)
   }
 
   const deleteTodo = (id: number) => {
@@ -100,7 +100,7 @@ function Dashboard() {
 
   return (
     <>
-      <Head title="Dashboard" />
+      <Head title="Dasbor" />
       <div className="min-h-screen bg-app-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Header */}
@@ -111,7 +111,7 @@ function Dashboard() {
                   <ListTodo className="h-6 w-6 text-app-primary" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-app-text mb-1">Dashboard</h1>
+                  <h1 className="text-3xl font-bold text-app-text mb-1">Dasbor</h1>
                   <p className="text-app-text-secondary">Selamat datang kembali! Ringkasan tugas Anda hari ini.</p>
                 </div>
               </div>
@@ -193,7 +193,7 @@ function Dashboard() {
                     <TrendingUp className="h-7 w-7 text-app-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-sm font-medium text-app-text">Progress</CardTitle>
+                    <CardTitle className="text-sm font-medium text-app-text">Kemajuan</CardTitle>
                     <div className="text-2xl font-bold text-app-primary">{Math.round(completionRate)}%</div>
                   </div>
                 </div>
@@ -328,7 +328,7 @@ function Dashboard() {
                             align="end"
                             className="bg-app-background-secondary border border-app-border shadow-lg text-app-text"
                           >
-                            <DropdownMenuLabel>Aksi</DropdownMenuLabel>
+                            <DropdownMenuLabel>Tindakan</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem asChild>
                               <Link href={`/task/${todo.id}`}>
@@ -338,9 +338,9 @@ function Dashboard() {
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                               <Edit className="mr-2 h-4 w-4" />
-                              Edit
+                              Ubah
                             </DropdownMenuItem>
-                            <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                            <DropdownMenuItem>Duplikat</DropdownMenuItem>
                             <DropdownMenuSeparator className="bg-app-border" />
                             <DropdownMenuItem
                               className="text-app-error focus:text-app-error"
