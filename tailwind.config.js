@@ -124,6 +124,10 @@ export default {
           text: "var(--app-input-text)",
           placeholder: "var(--app-input-placeholder)",
         },
+        "app-card": {
+          background: "var(--app-card)",
+          border: "var(--app-card-border)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -39,29 +39,19 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
   }
 
   return (
-    <div className="h-full flex flex-col justify-center p-8 bg-app-secondary text-app-text-inverse">
+    <div className="h-full flex flex-col justify-center rounded-3xl bg-app-card border border-app-card-border p-8 text-app-text">
       {/* Header */}
       <div className="text-center mb-8">
         <div className="flex justify-center mb-4">
-          <div className="p-3 border border-app-border rounded-lg">
+          <div className="mx-auto mb-2 flex h-16 w-16 items-center justify-center rounded-2xl bg-app-primary-light">
             <ListTodo className="h-8 w-8 text-app-primary" />
           </div>
         </div>
         <h2 className="text-2xl font-bold mb-2">
-          {isLogin ? (
-            <>
-              <span className="text-app-accent mr-2">👋</span>
-              Selamat Datang!
-            </>
-          ) : (
-            <>
-              <span className="text-app-error mr-2">🚀</span>
-              Daftar Akun Baru
-            </>
-          )}
+          My ToDo - {isLogin ? "Masuk" : "Daftar"}
         </h2>
         <p className="text-app-text-muted text-sm">
-          {isLogin ? "Masuk ke akun My ToDo Anda untuk melanjutkan" : "Buat akun baru untuk mulai mengelola tugas"}
+          {isLogin ? "Masuk untuk melanjutkan pengelolaan tugas harian Anda." : "Buat akun dan mulai mengatur aktivitas dengan lebih produktif."}
         </p>
       </div>
 
@@ -81,7 +71,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
       <form onSubmit={handleSubmit} className="space-y-5 flex-1">
         {!isLogin && (
           <div>
-            <Label htmlFor="name" className="text-app-text-inverse font-medium mb-2 block">
+            <Label htmlFor="name" className="text-app-text font-medium mb-2 block">
               Nama Lengkap
             </Label>
             <div className="relative">
@@ -89,7 +79,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
               <Input
                 id="name"
                 type="text"
-                placeholder="Full Name"
+                placeholder="Nama Lengkap"
                 value={data.name}
                 onChange={(e) => setData("name", e.target.value)}
                 className={`pl-10 bg-app-input-background text-app-input-text border border-app-input-border rounded-lg focus:outline-none focus:ring-2 focus:ring-app-input-border-focus placeholder:text-app-input-placeholder ${
@@ -103,7 +93,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
         )}
 
         <div>
-          <Label htmlFor="email" className="text-app-text-inverse font-medium mb-2 block">
+          <Label htmlFor="email" className="text-app-text font-medium mb-2 block">
             Email
           </Label>
           <div className="relative">
@@ -124,7 +114,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
         </div>
 
         <div>
-          <Label htmlFor="password" className="text-app-text-inverse font-medium mb-2 block">
+          <Label htmlFor="password" className="text-app-text font-medium mb-2 block">
             Password
           </Label>
           <div className="relative">
@@ -155,7 +145,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
 
         {!isLogin && (
           <div>
-            <Label htmlFor="confirmPassword" className="text-app-text-inverse font-medium mb-2 block">
+            <Label htmlFor="confirmPassword" className="text-app-text font-medium mb-2 block">
               Konfirmasi Password
             </Label>
             <div className="relative">
@@ -163,7 +153,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
               <Input
                 id="confirmPassword"
                 type={showConfirmPassword ? "text" : "password"}
-                placeholder="Confirm Password"
+                placeholder="Konfirmasi Password"
                 value={data.password_confirmation}
                 onChange={(e) => setData("password_confirmation", e.target.value)}
                 className={`pl-10 pr-10 bg-app-input-background text-app-input-text border border-app-input-border rounded-lg focus:outline-none focus:ring-2 focus:ring-app-input-border-focus placeholder:text-app-input-placeholder ${
@@ -193,7 +183,7 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
               <input type="checkbox" className="mr-2 accent-app-error rounded" />
               Remember me
             </label>
-            <button type="button" className="text-app-accent hover:underline">
+            <button type="button" className="text-app-text-muted hover:underline">
               Forgot password?
             </button>
           </div>
@@ -202,14 +192,14 @@ const AuthCard: React.FC<AuthCardProps> = ({ isLogin, toggleForm }) => {
         <Button
           type="submit"
           disabled={processing}
-          className="w-full bg-app-button-gradient hover:bg-app-button-gradient-hover text-app-button-primary-text py-3 rounded-lg font-bold shadow-lg transition-all duration-200 mt-8"
+          className="w-full text-app-button-primary-text py-3 rounded-lg font-bold shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:translate-y-0      disabled:pointer-events-none disabled:opacity-70 mt-8"
           style={{
             background: processing ? "var(--app-button-gradient-hover)" : "var(--app-button-gradient)",
           }}
         >
           {processing ? (
             <>
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-app-button-primary-text mr-2"></div>
+              <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"></div>
               {isLogin ? "Login..." : "Register..."}
             </>
           ) : (
