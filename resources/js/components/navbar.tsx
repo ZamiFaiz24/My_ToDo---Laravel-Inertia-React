@@ -51,11 +51,11 @@ export default function Navbar() {
                 <Link key={item.name} href={item.href}>
                   <Button
                     variant={isActive ? 'default' : 'ghost'}
-                    className={`text-app-primary hover:bg-app-primary-light transition-all ${
-                      isActive
-                        ? 'bg-app-primary text-white font-semibold'
-                        : 'text-app-primary hover:text-app-primary-dark'
-                    }`}
+                    className={`transition-all duration-300 ${
+                    isActive
+                      ? 'bg-app-primary text-white font-semibold cursor-default'
+                      : 'text-app-primary hover:bg-app-primary-light hover:text-app-primary-dark'
+                  }`}
                   >
                     <item.icon className={`h-4 w-4 mr-2 ${isActive ? 'text-white' : 'text-app-primary'}`} />
                     {item.name}
@@ -83,19 +83,6 @@ export default function Navbar() {
                 3
               </Badge>
             </div>
-
-            {/* Settings */}
-            <Link href="/settings">
-              <Button
-                variant={url === '/settings' ? 'default' : 'ghost'}
-                size="icon"
-                className={`text-app-primary hover:bg-app-primary-light ${
-                  url === '/settings' ? 'bg-app-primary text-white' : ''
-                }`}
-              >
-                <Settings className={`h-5 w-5 ${url === '/settings' ? 'text-white' : 'text-app-primary'}`} />
-              </Button>
-            </Link>
 
             {/* User Menu */}
             <DropdownMenu>

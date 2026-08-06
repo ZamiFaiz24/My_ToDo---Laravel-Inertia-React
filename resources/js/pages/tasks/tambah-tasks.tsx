@@ -88,7 +88,7 @@ function AddTask() {
     <>
       <Head title="Tambah Tugas" />
       <div className="min-h-screen bg-app-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
@@ -100,13 +100,13 @@ function AddTask() {
               </Link>
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-app-primary mb-2">Tambah Tugas Baru</h1>
+              <h1 className="text-3xl font-bold text-app-text mb-2">Tambah Tugas Baru</h1>
               <p className="text-app-text-secondary">Buat tugas baru dan atur prioritas serta tenggat waktunya</p>
             </div>
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Main Form */}
               <div className="lg:col-span-2 space-y-6">
                 {/* Basic Information */}
@@ -146,6 +146,41 @@ function AddTask() {
                   </CardContent>
                 </Card>
 
+                {/* Action Buttons */}
+                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md transition">
+                  <CardContent className="pt-6">
+                    <div className="flex gap-3">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleReset}
+                        disabled={isSubmitting}
+                        className="flex-1 border-app-primary text-app-primary hover:bg-app-primary-light"
+                      >
+                        <X className="mr-2 h-4 w-4" />
+                        Reset Form
+                      </Button>
+
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting || !(data.title || "").trim()}
+                        className="flex-1 bg-app-primary hover:bg-app-primary-dark text-white font-semibold"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                            Menyimpan...
+                          </>
+                        ) : (
+                          <>
+                            <Save className="mr-2 h-4 w-4" />
+                            Simpan Tugas
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
 
               {/* Sidebar */}
@@ -248,64 +283,74 @@ function AddTask() {
                 {/* Preview */}
                 <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
                   <CardHeader>
-                    <CardTitle className="text-app-primary">Preview</CardTitle>
-                    <CardDescription className="text-app-text-secondary">Pratinjau tugas yang akan dibuat</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <div>
-                        <h4 className="font-semibold text-app-primary">{data.title || "Judul tugas akan muncul di sini"}</h4>
-                        {data.description && (
-                          <p className="text-sm text-app-text-secondary mt-1 line-clamp-2">{data.description}</p>
-                        )}
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {data.priority && (
-                          <Badge className={getPriorityColor(data.priority)}>{getPriorityText(data.priority)}</Badge>
-                        )}
-                        {data.category && <Badge variant="outline" className="border-app-primary text-app-primary">{data.category}</Badge>}
-                      </div>
-                      {data.dueDate && (
-                        <p className="text-xs text-app-text-secondary">
-                          Tenggat: {new Date(data.dueDate).toLocaleDateString("id-ID")}
-                        </p>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+                    <CardTitle className="flex items-center gap-2 text-app-primary">
+                      <FileText className="h-5 w-5" />
+                      Preview Tugas
+                    </CardTitle>
 
-                {/* Action Buttons */}
-                <Card className="bg-app-background-secondary border border-app-border hover:shadow-md hover:border-app-primary transition">
-                  <CardContent className="pt-6">
-                    <div className="space-y-3">
-                      <Button
-                        type="submit"
-                        disabled={isSubmitting || !(data.title || "").trim()}
-                        className="w-full bg-app-primary hover:bg-app-primary-dark text-white font-semibold"
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                            Menyimpan...
-                          </>
-                        ) : (
-                          <>
-                            <Save className="mr-2 h-4 w-4" />
-                            Simpan Tugas
-                          </>
-                        )}
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={handleReset}
-                        className="w-full border-app-primary text-app-primary hover:bg-app-primary-light"
-                        disabled={isSubmitting}
-                      >
-                        <X className="mr-2 h-4 w-4" />
-                        Reset Form
-                      </Button>
+                    <CardDescription className="text-app-text-secondary">
+                      Lihat ringkasan tugas sebelum disimpan.
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+
+                    {/* Judul */}
+                    <div>
+                      <h4 className="font-semibold text-app-text text-lg">
+                        {data.title?.trim() || "Belum ada judul tugas"}
+                      </h4>
+
+                      <p className="text-sm text-app-text-secondary mt-2 line-clamp-3">
+                        {data.description?.trim() ||
+                          "Mulailah mengisi formulir di sebelah kiri untuk melihat preview tugas."}
+                      </p>
                     </div>
+
+                    <div className="border-t border-app-border pt-4 space-y-3">
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-app-text-muted">
+                          Prioritas
+                        </span>
+
+                        {data.priority ? (
+                          <Badge className={getPriorityColor(data.priority)}>
+                            {getPriorityText(data.priority)}
+                          </Badge>
+                        ) : (
+                          <span className="text-sm text-app-text-secondary">-</span>
+                        )}
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-app-text-muted">
+                          Kategori
+                        </span>
+
+                        {data.category ? (
+                          <Badge variant="outline" className="border-app-primary text-app-primary">
+                            {data.category}
+                          </Badge>
+                        ) : (
+                          <span className="text-sm text-app-text-secondary">-</span>
+                        )}
+                      </div>
+
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-app-text-muted">
+                          Deadline
+                        </span>
+
+                        <span className="text-sm text-app-text">
+                          {data.dueDate
+                            ? new Date(data.dueDate).toLocaleDateString("id-ID")
+                            : "-"}
+                        </span>
+                      </div>
+
+                    </div>
+
                   </CardContent>
                 </Card>
               </div>

@@ -77,19 +77,6 @@ function Dashboard() {
     return matchesSearch
   })
 
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'high':
-        return 'bg-app-error text-app-error-foreground'
-      case 'medium':
-        return 'bg-app-accent text-app-accent-foreground'
-      case 'low':
-        return 'bg-app-primary text-app-primary-foreground'
-      default:
-        return 'bg-gray-200 text-gray-800'
-    }
-  }
-
   const getPriorityLabel = (priority: string) => {
     switch (priority) {
       case 'high':
@@ -120,16 +107,16 @@ function Dashboard() {
           <div className="mb-8">
             <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
               <div className="flex items-start gap-4">
-                <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-app-primary-light shadow-sm">
+                <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-app-border bg-app-primary-light shadow-sm">
                   <ListTodo className="h-6 w-6 text-app-primary" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold text-app-text mb-1">Dasbor</h1>
-                  <p className="text-app-text-secondary">Selamat datang kembali! Ringkasan tugas Anda hari ini.</p>
+                  <h1 className="text-3xl font-extrabold tracking-tight text-app-text mb-1">Dasbor</h1>
+                  <p className="text-sm text-app-text-muted">Selamat datang kembali! Ringkasan tugas Anda hari ini.</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 mb-10">
                 <Link href="/tambah-tugas">
                   <Button className="bg-app-primary hover:bg-app-primary-dark text-white font-semibold shadow-md">
                     <Plus className="mr-2 h-4 w-4" />
@@ -137,7 +124,7 @@ function Dashboard() {
                   </Button>
                 </Link>
                 <Link href="/calendar">
-                  <Button variant="ghost" className="hidden md:inline-flex text-app-text-secondary hover:bg-app-primary-light">
+                  <Button variant="outline" className="hidden md:flex border-app-border text-app-text-secondary hover:bg-app-primary-light hover:border-app-primary">
                     <Calendar className="h-4 w-4 mr-2 text-app-primary" />
                     Kalender
                   </Button>
@@ -148,15 +135,15 @@ function Dashboard() {
 
           {/* Stat Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
-              <CardHeader className="flex items-center justify-between pb-2">
+            <Card className="bg-app-background-secondary rounded-xl border border-app-border shadow-md hover:shadow-xl transition">
+              <CardHeader className="flex items-start justify-between pb-2">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-xl bg-app-primary-light flex items-center justify-center">
                     <ListTodo className="h-7 w-7 text-app-primary" />
                   </div>
                   <div>
                     <CardTitle className="text-sm font-medium text-app-text">Total Tugas</CardTitle>
-                    <div className="text-2xl font-bold text-app-primary">{totalTodos}</div>
+                    <div className="text-3xl font-extrabold tracking-tight text-app-primary">{totalTodos}</div>
                   </div>
                 </div>
               </CardHeader>
@@ -165,8 +152,8 @@ function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
-              <CardHeader className="flex items-center justify-between pb-2">
+            <Card className="bg-app-background-secondary rounded-xl border border-app-border shadow-md hover:shadow-xl transition">
+              <CardHeader className="flex items-start justify-between pb-2">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-xl bg-app-success/20 flex items-center justify-center">
                     <CheckCircle2 className="h-7 w-7 text-app-success" />
@@ -182,8 +169,8 @@ function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
-              <CardHeader className="flex items-center justify-between pb-2">
+            <Card className="bg-app-background-secondary rounded-xl border border-app-border shadow-md hover:shadow-xl transition">
+              <CardHeader className="flex items-start justify-between pb-2">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-xl bg-app-warning/20 flex items-center justify-center">
                     <Calendar className="h-7 w-7 text-app-warning" />
@@ -199,8 +186,8 @@ function Dashboard() {
               </CardContent>
             </Card>
 
-            <Card className="bg-app-background-secondary/95 rounded-xl border border-transparent shadow-sm hover:shadow-lg transition">
-              <CardHeader className="flex items-center justify-between pb-2">
+            <Card className="bg-app-background-secondary rounded-xl border border-app-border shadow-md hover:shadow-xl transition">
+              <CardHeader className="flex items-start justify-between pb-2">
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 rounded-xl bg-app-primary-light flex items-center justify-center">
                     <TrendingUp className="h-7 w-7 text-app-primary" />
@@ -212,7 +199,7 @@ function Dashboard() {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <Progress value={completionRate} className="mt-2 bg-app-primary-light" />
+                <Progress value={completionRate} className="space-y-2 bg-app-primary-light" />
                 <p className="text-xs text-app-text-secondary mt-2">Persentase tugas selesai</p>
               </CardContent>
             </Card>
