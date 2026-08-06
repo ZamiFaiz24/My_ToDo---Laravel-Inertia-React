@@ -24,6 +24,14 @@ interface TodoForm {
 
 const categories = ["Pekerjaan", "Personal", "Kesehatan", "Belajar", "Keluarga", "Hobi", "Keuangan", "Lainnya"]
 
+function formatDate(date: Date) {
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-")
+}
+
 function AddTask() {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const { data, setData, post, processing, errors, reset } = useForm<Partial<TodoForm>>({
@@ -273,7 +281,7 @@ function AddTask() {
                         value={data.dueDate}
                         onChange={(e) => handleInputChange("dueDate", e.target.value)}
                         className="border-app-border focus:border-app-primary bg-app-background text-app-text"
-                        min={new Date().toISOString().split("T")[0]}
+                        min={formatDate(new Date())}
                       />
                       {errors.dueDate && <div className="text-app-error text-xs mt-1">{errors.dueDate}</div>}
                     </div>
