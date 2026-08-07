@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, Head, usePage } from '@inertiajs/react'
 import {
   CheckCircle2,
@@ -13,6 +13,7 @@ import {
   Eye,
   Edit,
   Trash2,
+  Square,
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -51,12 +52,27 @@ function Dashboard() {
 
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState<'all' | 'completed' | 'pending'>('all')
+  const [currentTime, setCurrentTime] = useState(() => new Date())
 
-  const todos = tasks.map(task => ({
-    ...task,
-    dueDate: task.due_date,
-    createdAt: task.created_at,
-  }))
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const todos = tasks
+    .map(task => ({
+      ...task,
+      dueDate: task.due_date,
+      createdAt: task.created_at,
+    }))
+    .sort((first, second) => {
+      const firstDate = new Date(first.createdAt).getTime()
+      const secondDate = new Date(second.createdAt).getTime()
+      return secondDate - firstDate
+    })
 
   const completedTodos = todos.filter((todo) => todo.completed).length
   const totalTodos = todos.length
@@ -98,6 +114,19 @@ function Dashboard() {
     alert(`Hapus todo id: ${id}`)
   }
 
+  const todayLabel = currentTime.toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  })
+
+  const currentClock = currentTime.toLocaleTimeString('id-ID', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  })
+
   return (
     <>
       <Head title="Dasbor" />
@@ -105,7 +134,7 @@ function Dashboard() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-4">
                 <div className="flex items-center justify-center h-12 w-12 rounded-xl border border-app-border bg-app-primary-light shadow-sm">
                   <ListTodo className="h-6 w-6 text-app-primary" />
@@ -116,19 +145,15 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 mb-10">
-                <Link href="/tambah-tugas">
-                  <Button className="bg-app-primary hover:bg-app-primary-dark text-white font-semibold shadow-md">
-                    <Plus className="mr-2 h-4 w-4" />
-                    Tambah Tugas
-                  </Button>
-                </Link>
-                <Link href="/calendar">
-                  <Button variant="outline" className="hidden md:flex border-app-border text-app-text-secondary hover:bg-app-primary-light hover:border-app-primary">
-                    <Calendar className="h-4 w-4 mr-2 text-app-primary" />
-                    Kalender
-                  </Button>
-                </Link>
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="flex flex-col">
+                  <p className="text-sm font-semibold text-app-text mb-2">
+                    {todayLabel}
+                  </p>
+                  <p className="text-xs font-bold text-app-text-secondary">
+                    {currentClock} WIB
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -208,12 +233,20 @@ function Dashboard() {
           {/* Search & Filters */}
           <Card className="mb-8 bg-app-background-secondary rounded-xl border border-app-border shadow-sm">
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
                 <div>
                   <CardTitle className="text-app-text font-semibold">Semua Tugas</CardTitle>
                   <CardDescription className="text-app-text-secondary">Kelola dan pantau semua tugas Anda</CardDescription>
                 </div>
-                <div className="hidden sm:flex items-center gap-2">
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <Link href="/tambah-tugas">
+                    <Button className="bg-app-primary font-semibold text-white hover:bg-app-primary-dark">
+                      <Plus className="mr-2 h-4 w-4" />
+                      Tambah Tugas
+                    </Button>
+                  </Link>
+
                   {(['all', 'pending', 'completed'] as const).map((status) => (
                     <Button
                       key={status}
@@ -269,89 +302,120 @@ function Dashboard() {
                   filteredTodos.map((todo) => (
                     <div
                       key={todo.id}
-                      className="flex items-center space-x-4 p-4 bg-app-background-secondary rounded-xl ring-1 ring-app-border hover:shadow-md transition"
+                          className="rounded-2xl border border-app-border bg-app-background-secondary p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                     >
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => toggleTodo(todo.id)}
-                        className="p-0 h-auto hover:bg-transparent"
-                      >
-                        <CheckCircle2
-                          className={`h-6 w-6 ${todo.completed ? 'text-app-success' : 'text-app-text-muted hover:text-app-primary'}`}
-                        />
-                      </Button>
+                          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                            <div className="min-w-0 flex-1">
+                              <div className="flex items-start gap-3">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => toggleTodo(todo.id)}
+                                  aria-label={todo.completed ? 'Tandai belum selesai' : 'Tandai selesai'}
+                                  className={
+                                    `mt-0.5 h-9 w-9 shrink-0 rounded-full border p-0 transition ` +
+                                    (todo.completed
+                                      ? 'border-app-success/30 bg-app-success-light text-app-success hover:bg-app-success/20'
+                                      : 'border-app-border bg-app-background text-app-text-muted hover:border-app-primary hover:bg-app-primary-light hover:text-app-primary')
+                                  }
+                                >
+                                  {todo.completed ? (
+                                    <CheckCircle2 className="h-5.5 w-5.5" />
+                                  ) : (
+                                    <Square className="h-5 w-5" />
+                                  )}
+                                </Button>
 
-                      <div className="flex-1 min-w-0">
-                        <h3
-                          className={`font-semibold text-lg ${todo.completed ? 'line-through text-app-text-muted' : 'text-app-text'}`}
-                        >
-                          {todo.title}
-                        </h3>
-                        <p className="text-app-text-secondary text-sm mt-1 line-clamp-2">{todo.description}</p>
-                        <div className="flex items-center space-x-3 mt-3">
-                          <Badge
-                            className={
-                              todo.priority === 'high'
-                                ? 'bg-app-error text-white'
-                                : todo.priority === 'medium'
-                                ? 'bg-app-warning text-app-text'
-                                : 'bg-app-border text-app-text'
-                            }
-                          >
-                            {getPriorityLabel(todo.priority)}
-                          </Badge>
-                          <Badge variant="outline" className="text-xs border-app-border text-app-text-secondary">
-                            {todo.category}
-                          </Badge>
-                          <div className="flex items-center text-xs text-app-text-secondary">
-                            <Clock className="h-3 w-3 mr-1" />
-                            {new Date(todo.dueDate).toLocaleDateString('id-ID')}
-                          </div>
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex flex-wrap items-start justify-between gap-3">
+                                    <h3 className="text-lg font-semibold text-app-text">{todo.title}</h3>
+                                    <Badge
+                                      className={
+                                        todo.completed
+                                          ? 'bg-app-success-light text-app-success border border-app-success/20'
+                                          : 'bg-app-warning-light text-app-warning border border-app-warning/20'
+                                      }
+                                    >
+                                      <span className="mr-1.5 h-2 w-2 rounded-full bg-current" />
+                                      {todo.completed ? 'Selesai' : 'Belum Selesai'}
+                                    </Badge>
+                                  </div>
+
+                                  <p className={`mt-1 text-sm ${todo.completed ? 'text-app-text-muted' : 'text-app-text-secondary'}`}>
+                                    {todo.description}
+                                  </p>
+                                </div>
+                              </div>
+
+                              <div className="mt-4 flex flex-wrap items-center gap-3">
+                                <Badge
+                                  className={
+                                    todo.priority === 'high'
+                                      ? 'bg-app-error text-white'
+                                      : todo.priority === 'medium'
+                                      ? 'bg-app-warning text-app-text'
+                                      : 'bg-app-border text-app-text'
+                                  }
+                                >
+                                  {getPriorityLabel(todo.priority)}
+                                </Badge>
+                                <Badge variant="outline" className="border-app-border text-xs text-app-text-secondary">
+                                  {todo.category}
+                                </Badge>
+                                <div className="flex items-center text-xs text-app-text-secondary">
+                                  <Clock className="mr-1 h-3 w-3" />
+                                  {new Date(todo.dueDate).toLocaleDateString('id-ID', {
+                                    day: '2-digit',
+                                    month: 'long',
+                                    year: 'numeric',
+                                  })}
+                                </div>
+                              </div>
                         </div>
-                      </div>
 
-                      <div className="flex items-center space-x-2">
-                        <Link href={`/task/${todo.id}`}>
-                          <Button variant="ghost" size="sm" className="text-app-primary hover:bg-app-primary-light">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        </Link>
-
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="sm" className="text-app-text-secondary hover:text-app-text">
-                              <MoreVertical className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent
-                            align="end"
-                            className="bg-app-background-secondary border border-app-border shadow-lg text-app-text"
-                          >
-                            <DropdownMenuLabel>Tindakan</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem asChild>
+                            <div className="flex shrink-0 items-center justify-end gap-2 self-start lg:pt-1">
                               <Link href={`/task/${todo.id}`}>
-                                <Eye className="mr-2 h-4 w-4" />
-                                Lihat Detail
+                                <Button variant="ghost" size="sm" className="text-app-primary hover:bg-app-primary-light">
+                                  <Eye className="h-4 w-4" />
+                                  <span className="ml-2 hidden sm:inline">Detail</span>
+                                </Button>
                               </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              <Edit className="mr-2 h-4 w-4" />
-                              Ubah
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>Duplikat</DropdownMenuItem>
-                            <DropdownMenuSeparator className="bg-app-border" />
-                            <DropdownMenuItem
-                              className="text-app-error focus:text-app-error"
-                              onClick={() => deleteTodo(todo.id)}
-                            >
-                              <Trash2 className="mr-2 h-4 w-4" />
-                              Hapus
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
+
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button variant="ghost" size="sm" className="text-app-text-secondary hover:text-app-text">
+                                    <MoreVertical className="h-4 w-4" />
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent
+                                  align="end"
+                                  className="bg-app-background-secondary border border-app-border shadow-lg text-app-text"
+                                >
+                                  <DropdownMenuLabel>Tindakan</DropdownMenuLabel>
+                                  <DropdownMenuSeparator />
+                                  <DropdownMenuItem asChild>
+                                    <Link href={`/task/${todo.id}`}>
+                                      <Eye className="mr-2 h-4 w-4" />
+                                      Lihat Detail
+                                    </Link>
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem>
+                                    <Edit className="mr-2 h-4 w-4" />
+                                    Ubah
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem>Duplikat</DropdownMenuItem>
+                                  <DropdownMenuSeparator className="bg-app-border" />
+                                  <DropdownMenuItem
+                                    className="text-app-error focus:text-app-error"
+                                    onClick={() => deleteTodo(todo.id)}
+                                  >
+                                    <Trash2 className="mr-2 h-4 w-4" />
+                                    Hapus
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
+                            </div>
+                          </div>
                     </div>
                   ))
                 )}

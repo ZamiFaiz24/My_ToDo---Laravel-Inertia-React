@@ -1,6 +1,6 @@
 import React from 'react'
 import { Head, usePage, Link, router } from '@inertiajs/react'
-import { ArrowLeft, Edit, Trash2, Clock, Calendar, Tag, CheckCircle2, Paperclip, List } from 'lucide-react'
+import { ArrowLeft, Edit, Trash2, Calendar, CheckCircle2, Paperclip, List, ListTodo } from 'lucide-react'
 import AppLayout from '@/layouts/app-layout'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -75,89 +75,140 @@ export default function TaskShow() {
     <>
       <Head title={`Detail Tugas - ${task?.title || 'Detail'}`} />
       <div className="min-h-screen bg-app-background">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="mb-4 flex items-center gap-3">
-            <Link href="/dashboard">
-              <Button variant="ghost" className="text-app-primary">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Kembali
-              </Button>
-            </Link>
-            <div className="ml-auto flex items-center gap-2">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-app-border bg-app-primary-light shadow-sm">
+                <ListTodo className="h-6 w-6 text-app-primary" />
+              </div>
+              <div>
+                <h1 className="mb-1 text-3xl font-extrabold tracking-tight text-app-text">Detail Tugas</h1>
+                <p className="text-sm text-app-text-muted">Lihat informasi lengkap, status, dan lampiran tugas.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <Link href="/dashboard">
+                <Button variant="outline" className="border-app-border text-app-text-secondary hover:bg-app-primary-light hover:text-app-primary">
+                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  Kembali
+                </Button>
+              </Link>
               <Button
                 variant="outline"
-                className={`flex items-center gap-2 ${task.completed ? 'text-app-success border-app-success/30' : 'text-app-primary'}`}
+                className={`flex items-center gap-2 ${task.completed ? 'border-app-success/30 text-app-success' : 'border-app-border text-app-primary'}`}
                 onClick={toggleComplete}
               >
                 <CheckCircle2 className="h-4 w-4" />
-                {task.completed ? 'Tandai Belum Selesai' : 'Tandai Selesai'}
+                {task.completed ? 'Buka Selesai' : 'Tandai Selesai'}
               </Button>
               <Link href={`/task/${task.id}/edit`}>
-                <Button variant="ghost" className="text-app-primary">
+                <Button variant="ghost" className="text-app-primary hover:bg-app-primary-light">
                   <Edit className="h-4 w-4" />
                 </Button>
               </Link>
-              <Button variant="ghost" className="text-app-error" onClick={handleDelete}>
+              <Button variant="ghost" className="text-app-error hover:bg-app-error-light" onClick={handleDelete}>
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {/* Main content */}
-            <div className="lg:col-span-2 space-y-4">
-              <Card className="bg-app-background-secondary border border-app-border shadow-sm">
-                <CardHeader>
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <CardTitle className="text-app-primary text-xl font-semibold">
-                        {task.title}
-                      </CardTitle>
-                      <CardDescription className="text-app-text-secondary mt-1">
-                        {task.category ?? 'Tanpa kategori'} •{' '}
-                        {task.due_date ? (
-                          <span className="inline-flex items-center text-sm text-app-text-secondary">
-                            <Calendar className="h-4 w-4 mr-1" />
-                            {new Date(task.due_date).toLocaleDateString('id-ID')}
-                          </span>
-                        ) : (
-                          <span className="text-sm text-app-text-secondary">Tidak ada tenggat</span>
+            <div className="space-y-4 lg:col-span-2">
+              <Card className="overflow-hidden border border-app-border bg-app-background-secondary shadow-sm">
+                <CardHeader className="border-b border-app-border bg-gradient-to-r from-app-primary/10 via-app-primary/5 to-transparent p-6">
+                  <div className="flex flex-col gap-5">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <CardTitle className="text-2xl text-app-primary">{task.title}</CardTitle>
+                          <Badge
+                            className={
+                              task.completed
+                                ? 'border border-app-success/20 bg-app-success-light text-app-success'
+                                : 'border border-app-warning/20 bg-app-warning-light text-app-warning'
+                            }
+                          >
+                            <span className="mr-1.5 h-2 w-2 rounded-full bg-current" />
+                            {task.completed ? 'Selesai' : 'Belum Selesai'}
+                          </Badge>
+                        </div>
+
+                        <CardDescription className="mt-2 text-app-text-secondary">
+                          {task.category ?? 'Tanpa kategori'}
+                          {' '}•{' '}
+                          {task.due_date ? (
+                            <span className="inline-flex items-center">
+                              <Calendar className="mr-1 h-4 w-4" />
+                              {new Date(task.due_date).toLocaleDateString('id-ID', {
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric',
+                              })}
+                            </span>
+                          ) : (
+                            <span>Tidak ada tenggat</span>
+                          )}
+                        </CardDescription>
+                      </div>
+
+                      <div className="flex flex-col items-start gap-2 rounded-xl border border-app-border bg-app-background px-3 py-2 md:items-end">
+                        <Badge className={getPriorityColor(task.priority)}>{getPriorityLabel(task.priority)}</Badge>
+                        {task.assigned_to && (
+                          <div className="text-xs text-app-text-secondary">Ditugaskan ke {task.assigned_to}</div>
                         )}
-                      </CardDescription>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <Badge className={getPriorityColor(task.priority)}>{getPriorityLabel(task.priority)}</Badge>
-                      {task.assigned_to && (
-                        <div className="text-xs text-app-text-secondary mt-2">{task.assigned_to}</div>
-                      )}
+
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                      <div className="rounded-xl border border-app-border bg-app-background/70 px-4 py-3">
+                        <div className="text-xs uppercase tracking-wide text-app-text-muted">Status</div>
+                        <div className={`mt-1 text-sm font-semibold ${task.completed ? 'text-app-success' : 'text-app-warning'}`}>
+                          {task.completed ? 'Selesai' : 'Belum Selesai'}
+                        </div>
+                      </div>
+                      <div className="rounded-xl border border-app-border bg-app-background/70 px-4 py-3">
+                        <div className="text-xs uppercase tracking-wide text-app-text-muted">Kategori</div>
+                        <div className="mt-1 text-sm font-semibold text-app-text">{task.category ?? 'Tanpa kategori'}</div>
+                      </div>
+                      <div className="rounded-xl border border-app-border bg-app-background/70 px-4 py-3">
+                        <div className="text-xs uppercase tracking-wide text-app-text-muted">Tenggat</div>
+                        <div className="mt-1 text-sm font-semibold text-app-text">
+                          {task.due_date ? new Date(task.due_date).toLocaleDateString('id-ID', {
+                            day: '2-digit',
+                            month: 'long',
+                            year: 'numeric',
+                          }) : 'Tidak ada'}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
 
-                <CardContent>
-                  <div className="prose max-w-none text-app-text">
+                <CardContent className="space-y-5 p-6">
+                  <div className="rounded-2xl border border-app-border bg-app-background/70 p-5">
+                    <h4 className="mb-3 text-sm font-semibold text-app-primary">Deskripsi Tugas</h4>
                     {task.description ? (
-                      <p>{task.description}</p>
+                      <p className="leading-7 text-app-text">{task.description}</p>
                     ) : (
-                      <p className="text-app-text-secondary">Tidak ada deskripsi untuk tugas ini.</p>
+                      <p className="text-sm text-app-text-secondary">Tidak ada deskripsi untuk tugas ini.</p>
                     )}
                   </div>
-
-                  <Separator className="my-4" />
 
                   {/* Checklist */}
                   {task.checklist && task.checklist.length > 0 && (
                     <>
-                      <h4 className="text-sm font-semibold text-app-primary mb-2 flex items-center gap-2">
+                      <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-app-primary">
                         <List className="h-4 w-4" /> Checklist
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-2 rounded-2xl border border-app-border bg-app-background/70 p-5">
                         {task.checklist.map((item) => (
-                          <li key={item.id} className="flex items-center gap-3">
-                            <div className={`h-5 w-5 rounded-sm flex items-center justify-center ${item.done ? 'bg-app-primary text-white' : 'border border-app-border text-app-text-secondary'}`}>
+                          <li key={item.id} className="flex items-start gap-3">
+                            <div className={`mt-0.5 flex h-5 w-5 items-center justify-center rounded-sm ${item.done ? 'bg-app-primary text-white' : 'border border-app-border text-app-text-secondary'}`}>
                               {item.done ? <CheckCircle2 className="h-4 w-4" /> : null}
                             </div>
-                            <span className={`${item.done ? 'line-through text-app-text-muted' : 'text-app-text'}`}>
+                            <span className={`${item.done ? 'text-app-text-muted' : 'text-app-text'}`}>
                               {item.text}
                             </span>
                           </li>
@@ -169,16 +220,16 @@ export default function TaskShow() {
 
                   {/* Attachments */}
                   <div>
-                    <h4 className="text-sm font-semibold text-app-primary mb-2 flex items-center gap-2">
+                    <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold text-app-primary">
                       <Paperclip className="h-4 w-4" /> Lampiran
                     </h4>
                     {task.attachments && task.attachments.length > 0 ? (
                       <ul className="space-y-2">
                         {task.attachments.map((att) => (
-                          <li key={att.id} className="flex items-center justify-between bg-app-background border border-app-border p-2 rounded-md">
+                          <li key={att.id} className="flex items-center justify-between rounded-xl border border-app-border bg-app-background p-3">
                             <div className="flex items-center gap-3">
                               <Paperclip className="h-4 w-4 text-app-primary" />
-                              <div className="text-sm text-app-primary">{att.name}</div>
+                              <div className="text-sm text-app-text">{att.name}</div>
                             </div>
                             {att.url ? (
                               <a href={att.url} className="text-sm text-app-primary underline" target="_blank" rel="noreferrer">Download</a>
@@ -198,45 +249,33 @@ export default function TaskShow() {
 
             {/* Right sidebar - metadata */}
             <div className="space-y-4">
-              <Card className="bg-app-background-secondary border border-app-border shadow-sm">
-                <CardContent>
-                  <div className="flex items-center justify-between mb-3">
+              <Card className="border border-app-border bg-app-background-secondary shadow-sm">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg text-app-primary">Metadata</CardTitle>
+                  <CardDescription className="text-app-text-secondary">Informasi dasar tugas</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-center justify-between rounded-lg bg-app-background/70 px-3 py-2">
                     <div className="text-sm text-app-text-secondary">ID</div>
                     <div className="text-sm font-medium text-app-text">#{task.id}</div>
                   </div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between rounded-lg bg-app-background/70 px-3 py-2">
                     <div className="text-sm text-app-text-secondary">Status</div>
-                    <div className={`text-sm font-medium ${task.completed ? 'text-app-success' : 'text-app-primary'}`}>
+                    <div className={`text-sm font-medium ${task.completed ? 'text-app-success' : 'text-app-warning'}`}>
                       {task.completed ? 'Selesai' : 'Belum Selesai'}
                     </div>
                   </div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between rounded-lg bg-app-background/70 px-3 py-2">
                     <div className="text-sm text-app-text-secondary">Prioritas</div>
-                    <Badge className={getPriorityColor(task.priority)}>{task.priority}</Badge>
+                    <Badge className={getPriorityColor(task.priority)}>{getPriorityLabel(task.priority)}</Badge>
                   </div>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between rounded-lg bg-app-background/70 px-3 py-2">
                     <div className="text-sm text-app-text-secondary">Dibuat</div>
                     <div className="text-sm text-app-text-secondary">{task.created_at ? new Date(task.created_at).toLocaleString('id-ID') : '-'}</div>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between rounded-lg bg-app-background/70 px-3 py-2">
                     <div className="text-sm text-app-text-secondary">Terakhir diperbarui</div>
                     <div className="text-sm text-app-text-secondary">{task.updated_at ? new Date(task.updated_at).toLocaleString('id-ID') : '-'}</div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-app-background-secondary border border-app-border shadow-sm">
-                <CardContent>
-                  <h4 className="text-sm font-semibold text-app-primary mb-2">Tindakan Cepat</h4>
-                  <div className="flex flex-col gap-2">
-                    <Link href={`/task/${task.id}/edit`}>
-                      <Button className="w-full bg-app-primary hover:bg-app-primary-dark text-app-text-inverse">
-                        <Edit className="mr-2 h-4 w-4" /> Edit Tugas
-                      </Button>
-                    </Link>
-                    <Button variant="outline" className="w-full text-app-error border-app-border hover:bg-app-error-light" onClick={handleDelete}>
-                      <Trash2 className="mr-2 h-4 w-4" /> Hapus Tugas
-                    </Button>
                   </div>
                 </CardContent>
               </Card>

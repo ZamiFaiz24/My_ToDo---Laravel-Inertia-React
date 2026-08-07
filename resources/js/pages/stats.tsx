@@ -60,7 +60,6 @@ export default function StatsPage() {
                   <div>
                     <div className="flex items-center gap-2">
                       <CardTitle className="text-2xl text-app-primary">Ringkasan Statistik</CardTitle>
-                      <Sparkles className="h-4 w-4 text-app-accent" />
                     </div>
                     <CardDescription className="mt-1 text-app-text-secondary">
                       Pantau progres penyelesaian tugas dan distribusi prioritas dengan lebih jelas.
