@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\NotificationController;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -22,7 +23,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('task.edit');
 
-    // detail task
     Route::get('/task/{id}', [TaskController::class, 'show'])->name('task.show');
 
     Route::put('/task/{id}', [TaskController::class, 'update'])->name('task.update');
@@ -36,6 +36,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/test-notification', [TaskController::class, 'testNotification'])
         ->middleware('auth')
         ->name('test.notification');
+
+    Route::post('/notifications/{id}/read', [NotificationController::class, 'read'])
+        ->middleware('auth')
+        ->name('notifications.read');
+    
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])
+        ->name('notifications.read-all');
 });
 
 require __DIR__ . '/settings.php';

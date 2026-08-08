@@ -39,6 +39,42 @@ export default function Navbar() {
     router.post('/logout');
   };
 
+  const handleNotificationClick = (notification: any) => {
+    // Kalau belum dibaca, tandai sebagai sudah dibaca
+    if (!notification.read_at) {
+      router.post(
+        `/notifications/${notification.id}/read`,
+        {},
+        {
+          preserveScroll: true,
+          preserveState: true,
+          onSuccess: () => {
+            if (notification.task_id) {
+              router.visit(`/task/${notification.task_id}`);
+            }
+          },
+        }
+      );
+
+      return;
+    }
+
+    // Kalau sudah dibaca, langsung ke detail tugas
+    if (notification.task_id) {
+      router.visit(`/task/${notification.task_id}`);
+    }
+  };
+
+  const handleMarkAllAsRead = () => {
+    router.post(
+      '/notifications/read-all',
+      {},
+      {
+        preserveScroll: true,
+      }
+    );
+  };
+
   return (
     <nav className="bg-app-background-secondary border-b border-app-border sticky top-0 z-50 shadow-sm transition-colors duration-300 dark:border-app-border-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -116,6 +152,7 @@ export default function Navbar() {
                 {unreadCount > 0 && (
                   <button
                     type="button"
+                    onClick={handleMarkAllAsRead}
                     className="flex items-center gap-1 text-xs font-medium text-app-primary hover:text-app-primary-dark"
                   >
                     <CheckCheck className="h-3.5 w-3.5" />
@@ -142,6 +179,7 @@ export default function Navbar() {
                   {notifications.map((notification: any) => (
                     <DropdownMenuItem
                       key={notification.id}
+                      onClick={() => handleNotificationClick(notification)}
                       className={`cursor-pointer items-start gap-3 px-3 py-3 ${
                         notification.read_at
                           ? 'opacity-70'
