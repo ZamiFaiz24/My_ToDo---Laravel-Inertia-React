@@ -106,12 +106,20 @@ function Dashboard() {
     }
   }
 
-  const toggleTodo = (id: number) => {
-    alert(`Status tugas dengan ID ${id} diubah`)
+  const toggleTodo = (id: number, completed: boolean) => {
+      router.put(
+          `/task/${id}`,
+          {
+              completed: !completed,
+          },
+          {
+              preserveScroll: true,
+          }
+      )
   }
 
   const deleteTodo = (id: number) => {
-    alert(`Hapus todo id: ${id}`)
+      alert(`Hapus todo id: ${id}`)
   }
 
   const todayLabel = currentTime.toLocaleDateString('id-ID', {
@@ -317,7 +325,7 @@ function Dashboard() {
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  onClick={() => toggleTodo(todo.id)}
+                                  onClick={() => toggleTodo(todo.id, todo.completed)}
                                   aria-label={todo.completed ? 'Tandai belum selesai' : 'Tandai selesai'}
                                   className={
                                     `mt-0.5 h-9 w-9 shrink-0 rounded-full border p-0 transition ` +
@@ -380,49 +388,49 @@ function Dashboard() {
                               </div>
                         </div>
 
-                            <div className="flex shrink-0 items-center justify-end gap-2 self-start lg:pt-1">
-                              <Link href={`/task/${todo.id}`}>
-                                <Button variant="ghost" size="sm" className="text-app-primary hover:bg-app-primary-light">
-                                  <Eye className="h-4 w-4" />
-                                  <span className="ml-2 hidden sm:inline">Detail</span>
-                                </Button>
-                              </Link>
+                        <div className="flex shrink-0 items-center justify-end gap-2 self-start lg:pt-1">
+                          <Link href={`/task/${todo.id}`}>
+                            <Button variant="ghost" size="sm" className="text-app-primary hover:bg-app-primary-light">
+                              <Eye className="h-4 w-4" />
+                              <span className="ml-2 hidden sm:inline">Detail</span>
+                            </Button>
+                          </Link>
 
-                              <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                  <Button variant="ghost" size="sm" className="text-app-text-secondary hover:text-app-text">
-                                    <MoreVertical className="h-4 w-4" />
-                                  </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent
-                                  align="end"
-                                  className="bg-app-background-secondary border border-app-border shadow-lg text-app-text"
-                                >
-                                  <DropdownMenuLabel>Tindakan</DropdownMenuLabel>
-                                  <DropdownMenuSeparator />
-                                  <DropdownMenuItem asChild>
-                                    <Link href={`/task/${todo.id}`}>
-                                      <Eye className="mr-2 h-4 w-4" />
-                                      Lihat Detail
-                                    </Link>
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem>
-                                    <Edit className="mr-2 h-4 w-4" />
-                                    Ubah
-                                  </DropdownMenuItem>
-                                  <DropdownMenuItem>Duplikat</DropdownMenuItem>
-                                  <DropdownMenuSeparator className="bg-app-border" />
-                                  <DropdownMenuItem
-                                    className="text-app-error focus:text-app-error"
-                                    onClick={() => deleteTodo(todo.id)}
-                                  >
-                                    <Trash2 className="mr-2 h-4 w-4" />
-                                    Hapus
-                                  </DropdownMenuItem>
-                                </DropdownMenuContent>
-                              </DropdownMenu>
-                            </div>
-                          </div>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="sm" className="text-app-text-secondary hover:text-app-text">
+                                <MoreVertical className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent
+                              align="end"
+                              className="bg-app-background-secondary border border-app-border shadow-lg text-app-text"
+                            >
+                              <DropdownMenuLabel>Tindakan</DropdownMenuLabel>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem asChild>
+                                <Link href={`/task/${todo.id}`}>
+                                  <Eye className="mr-2 h-4 w-4" />
+                                  Lihat Detail
+                                </Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Edit className="mr-2 h-4 w-4" />
+                                Ubah
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>Duplikat</DropdownMenuItem>
+                              <DropdownMenuSeparator className="bg-app-border" />
+                              <DropdownMenuItem
+                                className="text-app-error focus:text-app-error"
+                                onClick={() => deleteTodo(todo.id)}
+                              >
+                                <Trash2 className="mr-2 h-4 w-4" />
+                                Hapus
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                      </div>
                     </div>
                   ))
                 )}
