@@ -7,6 +7,8 @@ use App\Models\Data\Tasks;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use app\Models\Data\Notifications;
 
 class User extends Authenticatable
 {
@@ -50,5 +52,10 @@ class User extends Authenticatable
     public function tasks()
     {
         return $this->hasMany(Tasks::class, 'user_id');
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notifications::class);
     }
 }

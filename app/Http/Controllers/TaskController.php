@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data\Tasks;
+use App\Models\Data\Notifications;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -133,5 +134,29 @@ class TaskController extends Controller
         $task->delete();
 
         return to_route('dashboard')->with('success', 'Tugas berhasil dihapus.');
+    }
+
+    public function testNotification()
+    {
+        $user = request()->user();
+
+        // Ambil tugas yang deadline-nya hari ini
+        $tasks = Tasks::where('user_id', $user->id)
+            ->whereDate('due_date', now()->toDateString())
+            ->where('completed', false)
+            ->get();
+
+        foreach ($tasks as $task) {
+            Notifications::create([
+                'user_id' => $user->id,
+                'task_id' => $task->id,
+                'title' => 'Tugas hari ini',
+                'message' => "Tugas \"{$task->title}\" memiliki tenggat hari ini.",
+                'type' => 'task_due',
+                'read_at' => null,
+            ]);
+        }
+
+        return back()->with('success', "{$tasks->count()} notifikasi berhasil dibuat.");
     }
 }

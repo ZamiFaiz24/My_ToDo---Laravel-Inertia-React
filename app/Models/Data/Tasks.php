@@ -3,6 +3,8 @@
 namespace App\Models\Data;
 
 use App\Models\User;
+use app\Models\Data\Notifications;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 
 class Tasks extends Model
@@ -25,5 +27,10 @@ class Tasks extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notifications::class, 'task_id');
     }
 }

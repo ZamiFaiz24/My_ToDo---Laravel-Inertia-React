@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, router, usePage } from '@inertiajs/react';
-import { ListTodo, Plus, Settings, Bell, User, Home, Calendar, BarChart3 } from 'lucide-react';
+import { ListTodo, Plus, Settings, Bell, User, Home, Calendar, BarChart3, Clock, CheckCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -26,6 +26,14 @@ export default function Navbar() {
   const url: string = props.url ?? (typeof window !== 'undefined' ? window.location.pathname : '');
   const auth: { user?: { name: string; email: string } } = props.auth ?? {};
   const user = auth?.user ?? { name: 'User', email: '' };
+
+  const notifications = props.notifications ?? [];
+
+  const unreadCount = notifications.filter(
+      (notification: any) => notification.read_at === null
+  ).length;
+
+  console.log("notifications:", notifications);
 
   const handleLogout = () => {
     router.post('/logout');
@@ -70,19 +78,111 @@ export default function Navbar() {
             {/* Appearance/Theme Toggle */}
             <AppearanceToggleDropdown />
 
-            {/* Notifications */}
-            <div className="relative">
+          {/* Notifications */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-app-primary hover:bg-app-primary-light"
+                className="relative text-app-primary hover:bg-app-primary-light"
               >
                 <Bell className="h-5 w-5 text-app-primary" />
+
+                {unreadCount > 0 && (
+                  <Badge className="absolute -right-1.5 -top-1.5 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-app-error px-1.5 text-xs text-white">
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </Badge>
+                )}
               </Button>
-              <Badge className="absolute -top-2 -right-2 bg-app-error text-white text-xs px-1.5 min-w-[1.25rem] h-5 flex items-center justify-center">
-                3
-              </Badge>
-            </div>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+              align="end"
+              className="w-80 bg-app-background-secondary text-app-text"
+            >
+              {/* Header */}
+              <DropdownMenuLabel className="flex items-center justify-between px-3 py-2">
+                <div>
+                  <p className="font-semibold text-app-text">
+                    Notifikasi
+                  </p>
+                  <p className="text-xs font-normal text-app-text-secondary">
+                    {unreadCount > 0
+                      ? `${unreadCount} notifikasi belum dibaca`
+                      : 'Tidak ada notifikasi baru'}
+                  </p>
+                </div>
+
+                {unreadCount > 0 && (
+                  <button
+                    type="button"
+                    className="flex items-center gap-1 text-xs font-medium text-app-primary hover:text-app-primary-dark"
+                  >
+                    <CheckCheck className="h-3.5 w-3.5" />
+                    Tandai semua
+                  </button>
+                )}
+              </DropdownMenuLabel>
+
+              <DropdownMenuSeparator className="bg-app-border" />
+
+              {/* Notification List */}
+              {notifications.length === 0 ? (
+                <div className="px-4 py-8 text-center">
+                  <Bell className="mx-auto mb-2 h-8 w-8 text-app-text-muted" />
+                  <p className="text-sm font-medium text-app-text">
+                    Tidak ada notifikasi
+                  </p>
+                  <p className="mt-1 text-xs text-app-text-secondary">
+                    Notifikasi tugas akan muncul di sini.
+                  </p>
+                </div>
+              ) : (
+                <div className="max-h-80 overflow-y-auto">
+                  {notifications.map((notification: any) => (
+                    <DropdownMenuItem
+                      key={notification.id}
+                      className={`cursor-pointer items-start gap-3 px-3 py-3 ${
+                        notification.read_at
+                          ? 'opacity-70'
+                          : 'bg-app-primary-light/30'
+                      }`}
+                    >
+                      <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-app-primary-light">
+                        <Bell className="h-4 w-4 text-app-primary" />
+                      </div>
+
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-semibold text-app-text">
+                          {notification.title}
+                        </p>
+
+                        <p className="mt-0.5 line-clamp-2 text-xs text-app-text-secondary">
+                          {notification.message}
+                        </p>
+
+                        <div className="mt-1.5 flex items-center gap-1 text-[11px] text-app-text-muted">
+                          <Clock className="h-3 w-3" />
+                          {new Date(notification.created_at).toLocaleDateString(
+                            'id-ID',
+                            {
+                              day: 'numeric',
+                              month: 'short',
+                              year: 'numeric',
+                            }
+                          )}
+                        </div>
+                      </div>
+
+                      {!notification.read_at && (
+                        <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-app-primary" />
+                      )}
+                    </DropdownMenuItem>
+                  ))}
+                </div>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
 
             {/* User Menu */}
             <DropdownMenu>

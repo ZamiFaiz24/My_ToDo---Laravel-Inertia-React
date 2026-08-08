@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Data\Notifications;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -46,6 +47,15 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+
+
+            'notifications' => fn() => $request->user()
+                ? Notifications::where('user_id', $request->user()->id)
+                ->latest()
+                ->take(10)
+                ->get()
+                : collect(),
+
             'ziggy' => fn (): array => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

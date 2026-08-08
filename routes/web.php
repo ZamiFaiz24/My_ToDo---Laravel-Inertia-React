@@ -31,6 +31,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // statistik
     Route::get('/stats', [TaskController::class, 'stats'])->name('stats');
+
+    //notifikasi
+    Route::post('/test-notification', [TaskController::class, 'testNotification'])
+        ->middleware('auth')
+        ->name('test.notification');
 });
 
 require __DIR__ . '/settings.php';

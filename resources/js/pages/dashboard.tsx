@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Head, usePage } from '@inertiajs/react'
+import { Link, Head, usePage, router } from '@inertiajs/react'
 import {
   CheckCircle2,
   Clock,
@@ -155,6 +155,13 @@ function Dashboard() {
                   </p>
                 </div>
               </div>
+
+              <Button
+                    onClick={() => router.post('/test-notification')}
+                    className="bg-app-primary text-white"
+                >
+                    Test Notifikasi
+                </Button>
             </div>
           </div>
 
